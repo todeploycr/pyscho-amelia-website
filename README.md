@@ -49,7 +49,10 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 ## Cosas que hay que hacer:
 1. Siempre hay que crear una rama nueva  |  git checkout -b nombredelarama  |  Si solo se quiere crear se omite el -b
 
-2. En caso de que se quiera cambiar de rama | git branch -> para ver las ramas existentes
+2. El nombre de la rama debe ser Feature-numero 
+
+3. En caso de que se quiera cambiar de rama | git branch -> para ver las ramas existentes
+
 
 ## Paso a paso para hacer un PR.
 
