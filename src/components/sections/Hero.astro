@@ -1,0 +1,151 @@
+---
+// Hero.astro
+import ameliaProfile from '@/assets/icons/amelia-profile.png';
+---
+
+<section
+  id="inicio"
+  class="relative min-h-screen flex items-center overflow-hidden from-[#f5ebe6] via-white to-[#f4d9d9]/20"
+>
+  <!-- Decorative shapes -->
+  <div
+    class="absolute top-0 left-0 w-1/2 h-full from-[#CC8989]/20 via-[#f4d9d9]/30 to-transparent"
+    style="clip-path: polygon(0 0, 100% 0, 0 100%);"
+  >
+  </div>
+  <div
+    class="absolute bottom-0 right-0 w-96 h-96 bg-[#367588]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"
+  >
+  </div>
+  <div
+    class="absolute top-20 right-1/4 w-32 h-32 bg-[#f5deb3]/40 rounded-full blur-2xl"
+  >
+  </div>
+
+  <!-- Content -->
+  <div class="relative container mx-auto px-4 pt-24 pb-16">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Text Column -->
+      <div class="text-center lg:text-left">
+        <span
+          class="inline-block mb-6 px-4 py-2 bg-[#f4d9d9]/50 text-gray-800 rounded-full text-sm font-medium animate-fade-in"
+        >
+          Psicología para madres, mujeres y parejas
+        </span>
+
+        <h1
+          class="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6 animate-fade-in-up"
+        >
+          Un espacio seguro{" "}
+          <span class="text-[#CC8989]">y profesional</span>
+          <br />
+          <span class="text-[#367588]">para ti</span>
+        </h1>
+
+        <p
+          class="text-lg md:text-xl text-gray-600 mb-10 max-w-xl mx-auto lg:mx-0 animate-fade-in-delay"
+        >
+          Soy Amelia, psicóloga clínica especializada en maternidad, salud
+          emocional femenina y terapia de pareja. Te acompaño con calidez y
+          profesionalismo.
+        </p>
+
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-delay"
+        >
+          <a
+            href="#contacto"
+            class="bg-[#367588] text-white px-8 py-4 rounded-full text-base font-medium hover:bg-[#367588]/90 transition-all shadow-lg hover:shadow-xl"
+          >
+            Agenda tu cita
+          </a>
+          <a
+            href="#sobre-mi"
+            class="border-2 border-[#CC8989] text-[#CC8989] px-8 py-4 rounded-full text-base font-medium hover:bg-[#CC8989]/10 transition-all"
+          >
+            Conóceme
+          </a>
+        </div>
+      </div>
+
+      <!-- Image Column -->
+      <div class="relative flex justify-center lg:justify-end">
+        <div class="relative w-72 h-72 md:w-96 md:h-96">
+          <!-- Decorative diamonds -->
+          <div
+            class="absolute -top-8 -left-8 w-24 h-24 bg-[#f5deb3]/60 rounded-2xl rotate-45"
+          >
+          </div>
+          <div
+            class="absolute -bottom-6 -right-6 w-20 h-20 bg-[#367588]/20 rounded-2xl rotate-45"
+          >
+          </div>
+          <div
+            class="absolute top-1/2 -left-12 w-16 h-16 bg-[#f4d9d9]/50 rounded-xl rotate-45"
+          >
+          </div>
+
+          <!-- Main image with diamond mask -->
+          <div class="relative w-full h-full transform rotate-0">
+            <div
+              class="absolute inset-0 bg-linear-to-br from-[#CC8989]/90 to-[#f4d9d9]/40 rounded-4xl rotate-6 w-102% shadow-lg"
+            >
+            </div>
+            <div
+              class="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white"
+            >
+              <img
+                src={ameliaProfile.src}
+                alt="Amelia - Psicóloga"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <div
+      class="w-6 h-10 border-2 border-[#367588]/40 rounded-full flex justify-center pt-2"
+    >
+      <div class="w-1.5 h-3 bg-[#367588]/60 rounded-full"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 1s ease-out;
+  }
+
+  .animate-fade-in-delay {
+    animation: fade-in 1s ease-out 0.2s backwards;
+  }
+</style>
