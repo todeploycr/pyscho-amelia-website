@@ -1,0 +1,90 @@
+---
+import ameliaTable from '@/assets/images/amelia-sit-on-table.png';
+import ameliaFamily from '@/assets/images/amelia-family.png';
+---
+
+<section id="sobre-mi" class="py-20 lg:py-32 bg-[#F4F0EC]/50">
+  <div class="container mx-auto px-4">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Image Column -->
+      <div class="relative order-2 lg:order-1">
+        <div class="relative max-w-md mx-auto lg:mx-0">
+          <!-- Main profile image -->
+          <div class="relative">
+            <div class="absolute -inset-3 bg-linear-to-br from-[#CC8989]/30 to-[#F4C2C2]/40 rounded-4xl rotate-2" />
+            <div class="relative bg-white rounded-4xl overflow-hidden shadow-xl">
+              <img
+                src={ameliaTable.src}
+                alt="Amelia - Psicóloga especializada en maternidad y pareja"
+                class="w-full h-auto object-cover aspect-4/5"
+              />
+            </div>
+          </div>
+
+          <!-- Floating secondary images -->
+          <div class="absolute -bottom-8 -right-4 md:-right-12 w-28 h-28 md:w-36 md:h-36">
+            <div class="absolute inset-0 bg-[#F5DEB3]/50 rounded-2xl rotate-6" />
+            <div class="relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src={ameliaFamily.src}
+                alt="Amelia con su familia"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          <!-- Experience badge -->
+          <div class="absolute -top-4 -right-2 md:right-8 bg-white rounded-xl p-3 shadow-xl border border-gray-200">
+            <div class="text-center">
+              <span class="block text-2xl font-display font-bold text-[#367588]">+5</span>
+              <span class="text-xs text-gray-600">Años exp.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Column -->
+      <div class="order-1 lg:order-2">
+        <span class="inline-block mb-4 px-4 py-1.5 bg-[#F4C2C2]/40 text-gray-900 rounded-full text-sm font-medium">
+          Sobre mí
+        </span>
+        
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-6">
+          Hola, soy <span class="text-[#CC8989]">Amelia</span>
+        </h2>
+        
+        <div class="space-y-4 text-gray-700 text-lg leading-relaxed">
+          <p>
+            Soy licenciada en Psicología por la <strong class="text-gray-900">Universidad de Costa Rica</strong>, 
+            especializada en salud mental materna, terapia de pareja y bienestar emocional femenino.
+          </p>
+          <p>
+            Como esposa y madre de dos pequeños, comprendo profundamente los desafíos 
+            de la maternidad y las dinámicas de pareja. Esta experiencia personal enriquece 
+            mi práctica profesional y me permite conectar de manera auténtica con cada paciente.
+          </p>
+          <p>
+            Mi misión es brindarte un espacio seguro, cálido y libre de juicios donde puedas 
+            explorar tus emociones, sanar heridas y fortalecer tu bienestar integral.
+          </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-gray-200">
+          <div class="text-center">
+            <span class="block text-2xl font-display font-bold text-[#367588]">+500</span>
+            <span class="text-sm text-gray-600">Pacientes atendidas</span>
+          </div>
+          <div class="text-center">
+            <span class="block text-2xl font-display font-bold text-[#CC8989]">100%</span>
+            <span class="text-sm text-gray-600">Confidencialidad</span>
+          </div>
+          <div class="text-center">
+            <span class="block text-2xl font-display font-bold text-[#367588]">Online</span>
+            <span class="text-sm text-gray-600">Sesiones virtuales</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
