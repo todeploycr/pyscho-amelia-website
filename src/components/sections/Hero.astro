@@ -1,6 +1,5 @@
 ---
-// Hero.astro
-import ameliaProfile from '@/assets/images/amelia-profile.png';
+import ameliaProfile from "@/assets/images/amelia-profile.jpeg";
 ---
 
 <section
@@ -45,9 +44,9 @@ import ameliaProfile from '@/assets/images/amelia-profile.png';
         <p
           class="text-lg md:text-xl text-gray-600 mb-10 max-w-xl mx-auto lg:mx-0 animate-fade-in-delay"
         >
-          Soy Amelia, psicóloga clínica especializada en maternidad, salud
-          emocional femenina y terapia de pareja. Te acompaño con calidez y
-          profesionalismo.
+          Soy Amelia, psicóloga clínica especializada en salud mental materna,
+          salud emocional femenina y terapia de pareja. Te acompaño con calidez,
+          empatía y profesionalismo en cada etapa de tu proceso.
         </p>
 
         <div
@@ -97,7 +96,7 @@ import ameliaProfile from '@/assets/images/amelia-profile.png';
               <img
                 src={ameliaProfile.src}
                 alt="Amelia - Psicóloga"
-                class="w-full h-full object-cover object-top"
+                class="w-100 h-100 object-cover object-[50%_20%] scale-100"
               />
             </div>
           </div>
@@ -106,36 +105,37 @@ import ameliaProfile from '@/assets/images/amelia-profile.png';
     </div>
   </div>
 
-<style>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
+  <style>
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
-    to {
-      opacity: 1;
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-  }
 
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+    .animate-fade-in {
+      animation: fade-in 0.8s ease-out;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    .animate-fade-in-up {
+      animation: fade-in-up 1s ease-out;
     }
-  }
 
-  .animate-fade-in {
-    animation: fade-in 0.8s ease-out;
-  }
-
-  .animate-fade-in-up {
-    animation: fade-in-up 1s ease-out;
-  }
-
-  .animate-fade-in-delay {
-    animation: fade-in 1s ease-out 0.2s backwards;
-  }
-</style>
+    .animate-fade-in-delay {
+      animation: fade-in 1s ease-out 0.2s backwards;
+    }
+  </style>
+</section>
