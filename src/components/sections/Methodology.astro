@@ -1,0 +1,151 @@
+---
+const methodologyPoints = [
+  {
+    title: "Espacio seguro",
+    description:
+      "Creo un ambiente de confianza donde puedas expresarte sin juicios, con total confidencialidad.",
+    icon: "shield",
+  },
+  {
+    title: "Escucha activa",
+    description:
+      "Te escucho con atención y empatía, validando tus emociones y experiencias.",
+    icon: "message",
+  },
+  {
+    title: "Enfoque cognitivo-conductual",
+    description:
+      "Trabajamos de manera práctica y colaborativa, ofreciéndote herramientas que podrás integrar en tu vida cotidiana para afrontar las dificultades, fortalecer tus recursos personales y promover un mayor equilibrio emocional.",
+    icon: "target",
+  },
+  {
+    title: "Acompañamiento continuo",
+    description:
+      "Te acompaño en tu proceso a tu propio ritmo, celebrando cada pequeño avance.",
+    icon: "clock",
+  },
+];
+---
+
+<section
+  id="metodologia"
+  class="py-10 lg:py-24 bg-linear-to-br from-[#F0F0F0] to-[#367588]/10"
+>
+  <div class="container mx-auto px-4">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Content -->
+      <div>
+        <span
+          class="inline-block mb-4 px-4 py-1.5 bg-[#367588]/10 text-[#367588] rounded-full text-sm font-medium"
+        >
+          Mi enfoque
+        </span>
+        <h2
+          class="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-6"
+        >
+          Un espacio de <span
+            class="bg-linear-to-br from-[#db7878] to-[#ff0000]/20 bg-clip-text text-transparent"
+            >sanación</span
+          > y crecimiento
+        </h2>
+
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          Mi trabajo se basa en el enfoque cognitivo-conductual, una metodología
+          que nos permite comprender cómo nuestros pensamientos, emociones y
+          conductas se relacionan entre sí, y cómo, a partir de pequeños cambios
+          conscientes, es posible generar transformaciones significativas en tu
+          bienestar diario.
+        </p>
+
+        <blockquote
+          class="border-l-4 border-[#CC8989] pl-6 italic text-gray-800"
+        >
+          "Creo firmemente que cada mujer y cada pareja tienen dentro de sí los
+          recursos necesarios para sanar y crecer. Mi rol es acompañarte a
+          descubrirlos."
+          <footer class="mt-2 text-sm text-gray-600 not-italic">
+            — Amelia
+          </footer>
+        </blockquote>
+      </div>
+
+      <!-- Methodology Points -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        {
+          methodologyPoints.map((point) => (
+            <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="w-12 h-12 bg-[#F4C2C2]/40 rounded-xl flex items-center justify-center mb-4">
+                {point.icon === "shield" && (
+                  <svg
+                    class="w-6 h-6 text-[#367588]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                )}
+                {point.icon === "message" && (
+                  <svg
+                    class="w-6 h-6 text-[#367588]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    />
+                  </svg>
+                )}
+                {point.icon === "target" && (
+                  <svg
+                    class="w-6 h-6 text-[#367588]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    />
+                  </svg>
+                )}
+                {point.icon === "clock" && (
+                  <svg
+                    class="w-6 h-6 text-[#367588]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                )}
+              </div>
+              <h3 class="font-display text-lg font-semibold text-gray-900 mb-2">
+                {point.title}
+              </h3>
+              <p class="text-gray-700 text-sm leading-relaxed">
+                {point.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
