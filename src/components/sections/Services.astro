@@ -6,6 +6,7 @@ const services = [
       "Acompañamiento emocional durante el embarazo, postparto y las diferentes etapas de la maternidad. Te ayudo a gestionar la ansiedad, culpa y agotamiento emocional.",
     color: "bg-[#CC8989]",
     icon: "heart",
+    whatsappMessage: "Hola Amelia, me interesa recibir información sobre terapia de salud mental materna. ¿Podrías contarme más?"
   },
   {
     title: "Terapia de pareja",
@@ -13,6 +14,7 @@ const services = [
       "Fortalece tu relación a través de una comunicación efectiva, resolución de conflictos y reconexión emocional. Construyan juntos una relación más sana y amorosa.",
     color: "bg-[#367588]",
     icon: "users",
+    whatsappMessage: "Hola Amelia, me interesa recibir información sobre terapia de pareja. ¿Podrías contarme más?"
   },
   {
     title: "Salud mental femenina",
@@ -20,6 +22,7 @@ const services = [
       "Trabaja tu autoestima, manejo del estrés, ansiedad y depresión. Te acompaño a reconectar contigo misma y recuperar tu bienestar integral.",
     color: "bg-[#CC8989]",
     icon: "sparkles",
+    whatsappMessage: "Hola Amelia, me interesa recibir información sobre terapia de salud mental femenina. ¿Podrías contarme más?"
   },
 ];
 ---
@@ -33,9 +36,9 @@ const services = [
       </span>
       <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4">
         ¿Cómo puedo
-<span class="bg-linear-to-br from-[#367588] to-[#F4C2C2]/40 bg-clip-text text-transparent">
-  ayudarte?
-</span>
+        <span class="bg-linear-to-br from-[#367588] to-[#F4C2C2]/40 bg-clip-text text-transparent">
+          ayudarte?
+        </span>
       </h2>
       <p class="text-lg text-gray-700">Ofrezco atención psicológica personalizada en modalidad online, 
         adaptándome a tus necesidades y horarios.
@@ -45,7 +48,12 @@ const services = [
     <!-- Services Grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {services.map((service) => (
-        <div class="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+        <a 
+          href={`https://wa.me/50660587256?text=${encodeURIComponent(service.whatsappMessage)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col cursor-pointer"
+        >
           <!-- Icon -->
           <div class={`w-14 h-14 ${service.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
             {service.icon === "heart" && (
@@ -65,38 +73,30 @@ const services = [
             )}
           </div>
 
-          <!-- Content -->
-          <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
-            {service.title}
-          </h3>
-          <p class="text-gray-700 leading-relaxed mb-6">
-            {service.description}
-          </p>
+          <!-- Content (flex-grow para empujar el link al final) -->
+          <div class="grow">
+            <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+              {service.title}
+            </h3>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              {service.description}
+            </p>
+          </div>
 
-          <!-- Link -->
-          
-            <a
-            href="#contacto"
-            class="inline-flex items-center text-[#367588] font-medium hover:text-[#367588]/80 transition-colors"
-          >
-            Más información
-            <svg
-              class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          <!-- Link (siempre al final) -->
+          <span class="inline-flex items-center gap-2 text-[#367588] font-medium group-hover:underline mt-auto">
+            Quiero más información
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-          </a>
-        </div>
+          </span>
+        </a>
       ))}
     </div>
 
     <!-- CTA -->
     <div class="text-center mt-16">
-      
-        <a
+      <a
         href="#contacto"
         class="inline-block px-8 py-4 bg-[#367588] text-white font-semibold rounded-full hover:bg-[#367588]/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
       >

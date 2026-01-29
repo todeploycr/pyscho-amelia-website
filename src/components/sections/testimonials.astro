@@ -13,15 +13,15 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Sofía",
-    role: "Madre primeriza",
-    content: "El acompañamiento de Amelia durante mi postparto fue fundamental. Me sentí escuchada y comprendida en todo momento. La recomiendo al 100%.",
+    name: "Catalina",
+    role: "Paciente de terapia individual",
+    content: "Amelia es una gran profesional que me a ayudado muchísimo en mi proceso terapeutico, es una persona empatica y amable que ayuda con muy buenos consejos y apoyo en las sesiones, ademas de dar espacio por fuera de estas mismas en caso de ser necesario. Es una excelente psicologa, uno se siente realmente escuchado y en confianza para contar aquello en lo que necesita que se le brinde ayuda para salir de algun episodio complicado o poco acompañamiento durante estos mismos. Es una gran opción para llevar terapia, incluso fuera de su especialidad que es la maternidad.",
     rating: 5,
   },
   {
-    name: "Andrea",
-    role: "Profesional y mamá",
-    content: "Estaba agotada intentando ser perfecta en todo. Amelia me ayudó a soltar la culpa y encontrar un balance saludable. Ahora me siento más presente y feliz.",
+    name: "Jimena Delgado",
+    role: "Paciente de terapia individual",
+    content: "En mi proceso con Amelia he logrado hablar de temas difíciles con confianza y sin ser juzgada. Hoy siento que tengo mayor claridad y confianza porque cuento con herramientas para enfrentar mi día a día.",
     rating: 5,
   },
   {
@@ -37,6 +37,9 @@ const testimonials = [
     rating: 5,
   },
 ];
+
+// Función para truncar texto
+const MAX_CHARS = 200;
 ---
 
 <section id="testimonios" class="py-10 lg:py-24 bg-linear-to-b from-[#F4F0EC] to-[#F4C2C2]/20 overflow-hidden">
@@ -60,7 +63,7 @@ const testimonials = [
       <div class="md:hidden">
         <div class="overflow-visible relative px-4">
           <div id="testimonials-track-mobile" class="flex transition-transform duration-500 ease-in-out">
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimonial, idx) => (
               <div class="shrink-0 w-full px-2">
                 <div class="bg-white rounded-3xl p-8 shadow-lg relative">
                   <!-- Quote Icon -->
@@ -79,10 +82,19 @@ const testimonials = [
                     ))}
                   </div>
 
-                  <!-- Content -->
-                  <p class="text-gray-700 mb-6 leading-relaxed italic">
-                    "{testimonial.content}"
-                  </p>
+                  <!-- Content with Read More -->
+                  <div class="mb-6">
+                    <p class="testimonial-text text-gray-700 leading-relaxed italic" data-full={testimonial.content}>
+                      "{testimonial.content.length > MAX_CHARS 
+                        ? testimonial.content.substring(0, MAX_CHARS) + '...' 
+                        : testimonial.content}"
+                    </p>
+                    {testimonial.content.length > MAX_CHARS && (
+                      <button class="read-more-btn text-[#367588] hover:text-[#367588]/80 font-medium text-sm mt-2 transition-colors">
+                        Ver más
+                      </button>
+                    )}
+                  </div>
 
                   <!-- Author -->
                   <div class="flex items-center gap-3">
@@ -144,7 +156,7 @@ const testimonials = [
 
       <!-- Tablet: Grid -->
       <div class="hidden md:grid lg:hidden grid-cols-2 gap-8">
-        {testimonials.map((testimonial) => (
+        {testimonials.map((testimonial, idx) => (
           <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 relative">
             <!-- Quote Icon -->
             <div class="absolute -top-4 left-8 w-10 h-10 bg-[#367588] rounded-full flex items-center justify-center shadow-lg z-10">
@@ -162,10 +174,19 @@ const testimonials = [
               ))}
             </div>
 
-            <!-- Content -->
-            <p class="text-gray-700 mb-6 leading-relaxed italic">
-              "{testimonial.content}"
-            </p>
+            <!-- Content with Read More -->
+            <div class="mb-6">
+              <p class="testimonial-text text-gray-700 leading-relaxed italic" data-full={testimonial.content}>
+                "{testimonial.content.length > MAX_CHARS 
+                  ? testimonial.content.substring(0, MAX_CHARS) + '...' 
+                  : testimonial.content}"
+              </p>
+              {testimonial.content.length > MAX_CHARS && (
+                <button class="read-more-btn text-[#367588] hover:text-[#367588]/80 font-medium text-sm mt-2 transition-colors">
+                  Ver más
+                </button>
+              )}
+            </div>
 
             <!-- Author -->
             <div class="flex items-center gap-3">
@@ -189,10 +210,10 @@ const testimonials = [
       <!-- Desktop: Carousel automático -->
       <div class="hidden lg:block">
         <div class="overflow-visible relative">
-          <div id="testimonials-track-desktop" class="flex gap-8 transition-transform duration-1000 ease-in-out">
+          <div id="testimonials-track-desktop" class="flex gap-8 transition-transform duration-800 ease-in-out">
             {[...testimonials, ...testimonials].map((testimonial, idx) => (
               <div class="shrink-0 w-[calc(33.333%-1.5rem)]">
-                <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 relative h-full">
+                <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 relative h-full flex flex-col">
                   <!-- Quote Icon -->
                   <div class="absolute -top-4 left-8 w-10 h-10 bg-[#367588] rounded-full flex items-center justify-center shadow-lg z-10">
                     <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -209,13 +230,22 @@ const testimonials = [
                     ))}
                   </div>
 
-                  <!-- Content -->
-                  <p class="text-gray-700 mb-6 leading-relaxed italic">
-                    "{testimonial.content}"
-                  </p>
+                  <!-- Content with Read More -->
+                  <div class="mb-6 grow">
+                    <p class="testimonial-text text-gray-700 leading-relaxed italic" data-full={testimonial.content}>
+                      "{testimonial.content.length > MAX_CHARS 
+                        ? testimonial.content.substring(0, MAX_CHARS) + '...' 
+                        : testimonial.content}"
+                    </p>
+                    {testimonial.content.length > MAX_CHARS && (
+                      <button class="read-more-btn text-[#367588] hover:text-[#367588]/80 font-medium text-sm mt-2 transition-colors">
+                        Ver más
+                      </button>
+                    )}
+                  </div>
 
                   <!-- Author -->
-                  <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-3 mt-auto">
                     <div class="w-12 h-12 bg-linear-to-br from-[#F4C2C2] to-[#CC8989] rounded-full flex items-center justify-center">
                       <span class="text-white font-semibold text-lg">
                         {testimonial.name.charAt(0)}
@@ -240,6 +270,24 @@ const testimonials = [
 </section>
 
 <script>
+  // ===== READ MORE/LESS FUNCTIONALITY =====
+  document.querySelectorAll('.read-more-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const btn = e.target as HTMLButtonElement;
+      const textElement = btn.previousElementSibling as HTMLParagraphElement;
+      const fullText = textElement.getAttribute('data-full') || '';
+      const isExpanded = btn.textContent === 'Ver menos';
+      
+      if (isExpanded) {
+        textElement.textContent = `"${fullText.substring(0, 200)}..."`;
+        btn.textContent = 'Ver más';
+      } else {
+        textElement.textContent = `"${fullText}"`;
+        btn.textContent = 'Ver menos';
+      }
+    });
+  });
+
   // ===== MOBILE CAROUSEL =====
   const trackMobile = document.getElementById('testimonials-track-mobile');
   const prevBtnMobile = document.getElementById('prev-mobile');
