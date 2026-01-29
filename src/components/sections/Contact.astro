@@ -94,7 +94,7 @@
               posible.
             </p>
             <a
-              href="https://wa.me/50688888888?text=Hola%20Amelia,%20me%20gustaría%20agendar%20una%20cita"
+              href="https://wa.me/50660587256?text=Hola%20Amelia,%20me%20gustaría%20agendar%20una%20cita"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#367588] font-semibold rounded-full hover:bg-white/90 transition-all duration-300 shadow-lg"
@@ -213,30 +213,50 @@
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contact-form");
     const successMessage = document.getElementById("form-success");
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const btnOriginalText = submitBtn.textContent;
 
-    if (!form) return;
-
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      // Cambiar estado del botón
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando...";
+      submitBtn.classList.add("opacity-50");
+
       const formData = new FormData(form);
-      const data = {
-        name: formData.get("name"),
-        email: formData.get("email"),
-        phone: formData.get("phone"),
-        message: formData.get("message"),
-      };
 
-      // 👇 Aquí luego conectas Netlify / EmailJS / backend
-      console.log("Formulario listo para envío:", data);
+      try {
+        // Enviar a tu archivo PHP
+        const response = await fetch("/send-email.php", {
+          method: "POST",
+          body: formData
+        });
 
-      // Simulación de éxito
-      form.reset();
-      successMessage.classList.remove("hidden");
+        const result = await response.json();
 
-      setTimeout(() => {
-        successMessage.classList.add("hidden");
-      }, 4000);
+        if (response.ok && result.success) {
+          // Éxito
+          form.reset();
+          successMessage.classList.remove("hidden");
+          
+          setTimeout(() => {
+            successMessage.classList.add("hidden");
+          }, 5000);
+        } else {
+          // Error del servidor
+          alert(result.message || "Hubo un error al enviar el mensaje. Por favor intenta de nuevo.");
+        }
+      } catch (error) {
+        // Error de conexión
+        console.error("Error:", error);
+        alert("Error de conexión. Por favor verifica tu internet e intenta de nuevo.");
+      } finally {
+        // Restaurar botón
+        submitBtn.disabled = false;
+        submitBtn.textContent = btnOriginalText;
+        submitBtn.classList.remove("opacity-50");
+      }
     });
   });
 </script>
