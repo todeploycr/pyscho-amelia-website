@@ -1,8 +1,22 @@
 ---
-import Layout from '@/layouts/MainLayout.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import Hero from "@/components/sections/hero.astro";
+import About from "@/components/sections/about.astro";
+import Services from "@/components/sections/services.astro";
+import Methodology from "@/components/sections/methodology.astro";
+import Testimonials from "@/components/sections/testimonials.astro";
+import FAQ from "@/components/sections/faq.astro";
+import Contact from "@/components/sections/contact.astro";
+import WhatsApp from "@/components/sections/whatsapp.astro";
 ---
 
-<Layout>
-
-
-</Layout>
+<MainLayout>
+  <Hero />
+  <About />
+  <Services />
+  <Methodology />
+  <Testimonials />
+  <FAQ />
+  <Contact />
+  <WhatsApp />
+</MainLayout>
