@@ -192,7 +192,7 @@ const MAX_CHARS = 200;
 
           <!-- Dots Indicators -->
           <div style="width: 110px; overflow: hidden; display: flex; align-items: center;">            
-             <div id="dots-inner" style="display: flex; gap: 8px; transition: transform 0.3s ease-in-out;">
+         <div id="dots-inner" style="display: flex; gap: 8px; transition: transform 0.3s ease-in-out;">
               {testimonials.map((_, index) => (
                 <button
                   class="dot"
@@ -392,7 +392,7 @@ const VISIBLE_DOTS = 5;
     // Offset usando ancho real del slide
     const firstSlide = trackMobile.children[0] as HTMLElement;
     const slideW = firstSlide.getBoundingClientRect().width;
-    trackMobile.style.transform = `translateX(-${currentIndexMobile * slideW}px)`;
+trackMobile.style.transform = `translateX(-${currentIndexMobile * 100}%)`;
 
     // Ventana deslizante de dots
     const half = Math.floor(VISIBLE_DOTS / 2);
