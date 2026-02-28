@@ -1,0 +1,396 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import ameliaProfile from "@/assets/images/amelia-women-therapy.jpeg";
+
+const therapeuticGoals = [
+  {
+    icon: "shield-alert",
+    text: "Identificar pensamientos automáticos que generan culpa, ansiedad o sensación de insuficiencia.",
+  },
+  {
+    icon: "sparkles",
+    text: "Cuestionar mandatos sociales y creencias rígidas que afectan la autoestima y el autocuidado.",
+  },
+  {
+    icon: "heart-pulse",
+    text: "Desarrollar habilidades para el manejo del estrés, la regulación emocional y la toma de decisiones.",
+  },
+  {
+    icon: "flame",
+    text: "Fortalecer la capacidad de poner límites sanos en las relaciones.",
+  },
+  {
+    icon: "hand-heart",
+    text: "Promover una relación más compasiva con el propio cuerpo, las emociones y las etapas de vida.",
+  },
+];
+
+const siteUrl = "https://psicologaameliareyes.com";
+const pageUrl = `${siteUrl}/salud-mental-femenina`;
+const imageUrl = `${siteUrl}${ameliaProfile.src}`;
+
+// ── Structured Data ────────────────────────────────────────────────────────────
+
+const jsonLdService = {
+  "@context": "https://schema.org",
+  "@type": ["Service", "MedicalBusiness"],
+  "name": "Salud Mental Femenina en Costa Rica",
+  "alternateName": "Terapia psicológica para mujeres Costa Rica",
+  "description": "Terapia psicológica especializada para mujeres en Costa Rica. Abordaje de ansiedad, autoestima, estrés y agotamiento emocional con enfoque cognitivo-conductual. Atención presencial en Heredia y sesiones online.",
+  "url": pageUrl,
+  "image": imageUrl,
+  "provider": {
+    "@type": ["Person", "Psychologist"],
+    "name": "Amelia Reyes",
+    "jobTitle": "Psicóloga Clínica",
+    "description": "Psicóloga clínica especializada en salud mental femenina y bienestar emocional en Costa Rica.",
+    "url": siteUrl,
+    "telephone": "+50660587256",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Heredia",
+      "addressCountry": "CR",
+    },
+  },
+  "areaServed": [
+    { "@type": "Country", "name": "Costa Rica" },
+    { "@type": "City", "name": "Heredia" },
+    { "@type": "City", "name": "San José" },
+  ],
+  "availableChannel": [
+    { "@type": "ServiceChannel", "serviceType": "Online", "availableLanguage": "es" },
+    {
+      "@type": "ServiceChannel",
+      "serviceType": "Presencial",
+      "serviceLocation": {
+        "@type": "Place",
+        "name": "Consultorio Heredia",
+        "address": { "@type": "PostalAddress", "addressLocality": "Heredia", "addressCountry": "CR" },
+      },
+    },
+  ],
+  "serviceType": "Psicología Clínica Femenina",
+  "audience": { "@type": "Audience", "audienceType": "Mujeres adultas" },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "CRC",
+    "url": "https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina",
+  },
+};
+
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "Servicios", "item": `${siteUrl}/#servicios` },
+    { "@type": "ListItem", "position": 3, "name": "Salud Mental Femenina", "item": pageUrl },
+  ],
+};
+
+const jsonLdFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué es la terapia psicológica para mujeres?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Es un acompañamiento especializado que reconoce los factores biológicos, sociales y relacionales propios de la experiencia femenina: presiones de género, autoexigencia, agotamiento emocional, dificultad para poner límites y baja autoestima. Trabaja desde un enfoque cognitivo-conductual basado en evidencia.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo sé si necesito terapia psicológica?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Podría ser útil si experimentás ansiedad frecuente, agotamiento emocional, dificultad para poner límites, baja autoestima, sensación de no poder con todo, o si atravesás una etapa de cambio o crisis emocional. No es necesario estar en crisis para iniciar un proceso terapéutico.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "¿Las sesiones son online o presenciales?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ofrezco sesiones tanto online (para cualquier parte de Costa Rica y el exterior) como presenciales en Heredia, Costa Rica.",
+      },
+    },
+  ],
+};
+
+const title = "Salud Mental Femenina en Costa Rica | Psicóloga Amelia Reyes | Heredia y Online";
+const description = "Terapia psicológica especializada para mujeres en Costa Rica. Trabajá la ansiedad, autoestima, estrés y agotamiento emocional con enfoque cognitivo-conductual. Atención presencial en Heredia y sesiones online con la Psicóloga Amelia Reyes.";
+---
+
+<MainLayout title={title} description={description} image={ameliaProfile.src}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdService)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdBreadcrumb)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdFAQ)} />
+
+  <div class="min-h-screen bg-[#F4F0EC]">
+
+    <!-- ===== HERO ===== -->
+    <section class="relative pt-16 pb-10 sm:pt-20 sm:pb-12 md:pt-24 md:pb-16 lg:pt-28 lg:pb-20 overflow-hidden bg-[#F4F0EC]">
+
+      <div class="hidden md:block absolute top-20 right-16 w-28 h-28 lg:w-36 lg:h-36 border border-[#CC8989]/15 rounded-full pointer-events-none" aria-hidden="true"></div>
+      <div class="hidden md:block absolute top-36 right-28 w-16 h-16 lg:w-20 lg:h-20 border border-[#F5DEB3]/25 rounded-full pointer-events-none" aria-hidden="true"></div>
+
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+
+        <!-- Breadcrumb visual + semántico -->
+        <nav aria-label="Ruta de navegación" class="mb-6 sm:mb-8 md:mb-10">
+          <ol class="flex items-center gap-1.5 text-sm text-gray-500 flex-wrap">
+            <li>
+              <a href="/" class="hover:text-gray-800 transition-colors inline-flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Inicio
+              </a>
+            </li>
+            <li aria-hidden="true" class="text-gray-300">/</li>
+            <li><a href="/#servicios" class="hover:text-gray-800 transition-colors">Servicios</a></li>
+            <li aria-hidden="true" class="text-gray-300">/</li>
+            <li><span class="text-[#CC8989] font-medium" aria-current="page">Salud Mental Femenina</span></li>
+          </ol>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
+
+          <!-- TEXTO — siempre primero -->
+          <div class="text-center lg:text-left">
+            <span class="inline-block mb-3 md:mb-4 px-4 py-1.5 bg-[#F5DEB3]/50 text-gray-700 rounded-full text-sm font-medium">
+              Servicio especializado · Heredia y Online
+            </span>
+            <h1 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#183942] leading-tight mb-4 md:mb-5">
+              Salud Mental
+              <span class="italic bg-linear-to-br from-[#CC8989]/60 to-[#CC8989]/80 bg-clip-text text-transparent"> Femenina</span>
+              <br class="hidden sm:block" />
+              <span class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-gray-500">en Costa Rica</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
+              Un acompañamiento para mujeres que buscan construir una relación más equilibrada consigo mismas, con sus vínculos y con las demandas del entorno. Atención presencial en <strong class="font-medium text-[#183942]">Heredia</strong> y <strong class="font-medium text-[#183942]">sesiones online</strong> para toda Costa Rica.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+              <a
+                href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina"
+                class="inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-[#367588] text-white text-sm md:text-base font-semibold rounded-full hover:bg-[#367588]/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+                aria-label="Agendar cita de Salud Mental Femenina por WhatsApp con Psicóloga Amelia Reyes"
+              >
+                Agenda tu cita
+              </a>
+              <a
+                href="#acompanamiento"
+                class="inline-flex items-center justify-center px-6 py-3.5 border-2 border-[#CC8989]/30 text-[#CC8989] text-sm font-semibold rounded-full hover:border-[#CC8989]/60 transition-all duration-300"
+              >
+                Cómo te acompaño
+              </a>
+            </div>
+          </div>
+
+          <!-- IMAGEN — después del texto -->
+          <div class="relative mt-8 sm:mt-10 lg:mt-0">
+            <div class="relative w-full max-w-60 sm:max-w-75 md:max-w-md mx-auto">
+              <div class="absolute -inset-3 md:-inset-4 bg-linear-to-tr from-[#F5DEB3]/40 to-[#CC8989]/20 rounded-3xl rotate-1" aria-hidden="true"></div>
+              <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden border-4 border-[#F4C2C2]/70 shadow-lg">
+                <img
+                  src={ameliaProfile.src}
+                  alt="Psicóloga Amelia Reyes, especialista en salud mental femenina en Heredia, Costa Rica"
+                  width={ameliaProfile.width}
+                  height={ameliaProfile.height}
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+              <!-- Pills de modalidad -->
+              <div class="mt-4 flex flex-col sm:flex-row lg:flex-col gap-2">
+                <div class="flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm border border-gray-100 text-sm text-gray-600">
+                  <span class="w-2 h-2 rounded-full bg-green-400 shrink-0" aria-hidden="true"></span>
+                  Sesiones online disponibles
+                </div>
+                <div class="flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm border border-gray-100 text-sm text-gray-600">
+                  <span class="w-2 h-2 rounded-full bg-[#367588] shrink-0" aria-hidden="true"></span>
+                  Presencial en Heredia
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTEXTO ===== -->
+    <section class="py-10 sm:py-12 md:py-16 lg:py-20 bg-white" aria-labelledby="context-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto space-y-5 sm:space-y-6 md:space-y-8">
+          <h2 id="context-heading" class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-[#183942] mb-4 md:mb-6">
+            ¿Qué es la terapia psicológica para mujeres?
+          </h2>
+
+          <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+            La salud mental femenina reconoce que las mujeres enfrentan, a lo largo de su vida, múltiples transiciones biológicas, sociales y relacionales que impactan su bienestar emocional: cambios hormonales, presiones sociales sobre el rol de género, exigencias laborales y familiares, maternidad, duelos, rupturas, experiencias de violencia, entre otros. La evidencia muestra que estos factores pueden influir en una mayor prevalencia de ansiedad, depresión, trastornos del estado de ánimo y altos niveles de autoexigencia y culpa en las mujeres.
+          </p>
+
+          <div class="bg-gray-50 rounded-xl md:rounded-2xl p-5 sm:p-6 md:p-8 border-l-4 border-[#F5DEB3]">
+            <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+              Desde el modelo cognitivo-conductual, se comprende que muchas mujeres han aprendido creencias que refuerzan el sacrificio personal, la responsabilidad excesiva por el bienestar de otros o la necesidad de cumplir con ideales inalcanzables (<em>"tengo que poder con todo"</em>, <em>"no puedo fallar"</em>, <em>"si descanso, soy egoísta"</em>). Estas creencias pueden sostener patrones de agotamiento, postergación de las propias necesidades y dificultades para poner límites.
+            </p>
+          </div>
+
+          <!-- Señales — keywords long-tail -->
+          <div>
+            <h3 class="font-display text-lg md:text-xl font-semibold text-[#183942] mb-3 md:mb-4">
+              ¿Cuándo buscar terapia psicológica?
+            </h3>
+            <ul class="space-y-2 text-sm md:text-base text-gray-600" role="list">
+              {[
+                "Ansiedad frecuente, preocupación excesiva o dificultad para descansar",
+                "Agotamiento emocional o sensación de no poder más",
+                "Baja autoestima, autocrítica intensa o dificultad para valorarte",
+                "Dificultad para poner límites en relaciones personales o laborales",
+                "Momentos de cambio: maternidad, separación, duelo, transiciones laborales",
+                "Deseo de conocerte mejor y construir una vida más alineada con tus valores",
+              ].map((item) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1.5 shrink-0 w-3.5 h-3.5 rounded-full bg-[#CC8989]/20 flex items-center justify-center" aria-hidden="true">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#CC8989]"></span>
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== OBJETIVOS TERAPÉUTICOS ===== -->
+    <section id="acompanamiento" class="py-10 sm:py-12 md:py-16 lg:py-20 bg-[#F4F0EC]" aria-labelledby="goals-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+        <h2 id="goals-heading" class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-[#183942] text-center mb-3 md:mb-4">
+          El acompañamiento <span class="text-[#CC8989]">terapéutico</span> busca
+        </h2>
+        <p class="text-sm md:text-base text-gray-500 text-center mb-8 sm:mb-10 md:mb-16 max-w-sm md:max-w-lg mx-auto">
+          Objetivos claros para tu bienestar emocional
+        </p>
+
+        <div class="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
+          {therapeuticGoals.map((goal, index) => (
+            <div class="relative flex items-start gap-4 md:gap-6 pb-8 md:pb-10 last:pb-0">
+              {index < therapeuticGoals.length - 1 && (
+                <div class="absolute left-5 md:left-6 top-12 md:top-14 w-0.5 h-full bg-linear-to-b from-[#CC8989]/25 to-[#F5DEB3]/25" aria-hidden="true"></div>
+              )}
+              <div class="relative z-10 shrink-0 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#CC8989]/20" aria-hidden="true">
+                {goal.icon === "shield-alert" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                )}
+                {goal.icon === "sparkles" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/>
+                    <path d="M5 3l.8 2.2L8 6l-2.2.8L5 9l-.8-2.2L2 6l2.2-.8z"/>
+                    <path d="M19 13l.8 2.2 2.2.8-2.2.8L19 19l-.8-2.2L16 16l2.2-.8z"/>
+                  </svg>
+                )}
+                {goal.icon === "heart-pulse" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 7.65l1.06 1.06L12 21.23l7.36-7.94 1.06-1.06a5.4 5.4 0 0 0 0-7.65z"/>
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                )}
+                {goal.icon === "flame" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/>
+                  </svg>
+                )}
+                {goal.icon === "hand-heart" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M11 14H9a1 1 0 0 1 0-2h3.5"/>
+                    <path d="M16 14h-1"/>
+                    <path d="M16 8h1a2 2 0 0 1 0 4h-1"/>
+                    <path d="M8 10V7a3 3 0 0 1 6 0v3"/>
+                    <path d="M5 20v-5a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v5"/>
+                    <path d="M12 6c.34-.5.76-1 1-1.5a3.5 3.5 0 0 1 5 5c-.5.5-1.17 1-1.5 1.5"/>
+                  </svg>
+                )}
+              </div>
+              <div class="bg-white rounded-xl md:rounded-2xl p-4 md:p-5 shadow-sm flex-1 border border-gray-100">
+                <p class="text-sm md:text-base text-gray-700 leading-relaxed">{goal.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOCAL SEO ===== -->
+    <section class="py-10 sm:py-12 md:py-16 bg-white" aria-labelledby="local-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 id="local-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] mb-4">
+            Terapia para mujeres en <span class="text-[#CC8989]">Heredia, Costa Rica</span>
+          </h2>
+          <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+            Si buscás una psicóloga para mujeres en Heredia, ofrezco atención presencial en consultorio y sesiones online para todo el país. El espacio terapéutico está diseñado para brindar confidencialidad, respeto y acompañamiento profesional, sin juicios y adaptado al ritmo de cada mujer.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="py-10 sm:py-12 md:py-16 bg-[#F4F0EC]" aria-labelledby="faq-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+          <h2 id="faq-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] text-center mb-8 md:mb-10">
+            Preguntas frecuentes
+          </h2>
+          <dl class="space-y-4">
+            <div class="bg-white rounded-xl p-5 sm:p-6">
+              <dt class="font-semibold text-[#183942] text-base mb-2">¿Qué es la terapia psicológica para mujeres?</dt>
+              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">Es un acompañamiento especializado que reconoce los factores biológicos, sociales y relacionales propios de la experiencia femenina: presiones de género, autoexigencia, agotamiento emocional, dificultad para poner límites y baja autoestima. Trabaja desde un enfoque cognitivo-conductual basado en evidencia.</dd>
+            </div>
+            <div class="bg-white rounded-xl p-5 sm:p-6">
+              <dt class="font-semibold text-[#183942] text-base mb-2">¿Cómo sé si necesito terapia psicológica?</dt>
+              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">Podría ser útil si experimentás ansiedad frecuente, agotamiento emocional, dificultad para poner límites, baja autoestima, sensación de no poder con todo, o si atravesás una etapa de cambio o crisis emocional. No es necesario estar en crisis para iniciar un proceso terapéutico.</dd>
+            </div>
+            <div class="bg-white rounded-xl p-5 sm:p-6">
+              <dt class="font-semibold text-[#183942] text-base mb-2">¿Las sesiones son online o presenciales?</dt>
+              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">Ofrezco sesiones tanto online (para cualquier parte de Costa Rica y el exterior) como presenciales en Heredia, Costa Rica. La modalidad se acuerda según lo que mejor se adapte a cada persona.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="py-10 sm:py-12 md:py-16 lg:py-20 bg-white" aria-labelledby="cta-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto text-center">
+          <h2 id="cta-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] mb-4 md:mb-5">
+            ¿Querés iniciar tu proceso terapéutico?
+          </h2>
+          <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-7 sm:mb-8 md:mb-10 px-2 sm:px-0">
+            La terapia cognitivo-conductual cuenta con sólida evidencia en el tratamiento de la ansiedad, la depresión y el estrés crónico, y resulta especialmente útil para acompañar a mujeres que buscan construir una relación más equilibrada consigo mismas, con sus vínculos y con las demandas del entorno.
+          </p>
+          <a
+            href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina"
+            class="inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-[#367588] text-white text-sm md:text-base font-semibold rounded-full hover:bg-[#367588]/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+            aria-label="Agendar cita de Salud Mental Femenina con Psicóloga Amelia Reyes por WhatsApp"
+          >
+            Quiero agendar mi cita
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</MainLayout>

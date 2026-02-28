@@ -7,15 +7,22 @@ import Footer from "@/components/layout/footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  showGlobalFAQ?: boolean; // true solo en el home (index.astro)
 }
 
 const { 
   title = "Psicóloga Amelia Reyes | Especialista en Madres, Mujeres y Parejas",
-  description = "Psicóloga clínica UCR especializada en salud mental materna, bienestar femenino y terapia de pareja. +12 años de experiencia. Sesiones online y presenciales en Heredia, Costa Rica."
+  description = "Psicóloga clínica UCR especializada en salud mental materna, bienestar femenino y terapia de pareja. +12 años de experiencia. Sesiones online y presenciales en Heredia, Costa Rica.",
+  image,
+  showGlobalFAQ = false,
 } = Astro.props;
 
 const siteUrl = "https://psicologaameliareyes.com";
 const siteImageUrl = `${siteUrl}${seoImage.src}`;
+
+// Si la página pasa su propia imagen se usa; si no, la imagen global del sitio
+const ogImageUrl = image ? `${siteUrl}${image}` : siteImageUrl;
 
 // URLs dinámicas para canonical y OG
 const canonical = Astro.url.href;
@@ -44,7 +51,7 @@ const currentUrl = Astro.url.href;
     <meta property="og:url" content={currentUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={siteImageUrl} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Psicóloga Amelia Reyes - Especialista en salud mental materna y terapia de pareja" />
@@ -56,9 +63,12 @@ const currentUrl = Astro.url.href;
     <meta name="twitter:url" content={currentUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={siteImageUrl} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content="Psicóloga Amelia Reyes - Terapia especializada" />
     
+    <!-- Slot para JSON-LD y meta tags adicionales por página -->
+    <slot name="head" />
+
     <!-- Datos estructurados JSON-LD para Negocio Local -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -81,82 +91,33 @@ const currentUrl = Astro.url.href;
         "longitude": "-84.0993"
       },
       "areaServed": [
-        {
-          "@type": "City",
-          "name": "Heredia"
-        },
-        {
-          "@type": "City",
-          "name": "San José"
-        },
-        {
-          "@type": "Country",
-          "name": "Costa Rica"
-        }
+        { "@type": "City", "name": "Heredia" },
+        { "@type": "City", "name": "San José" },
+        { "@type": "Country", "name": "Costa Rica" }
       ],
       "description": description,
       "slogan": "Acompañamiento profesional con enfoque humano",
       "foundingDate": "2013",
       "knowsAbout": [
-        "Psicología clínica",
-        "Salud mental materna",
-        "Psicología perinatal",
-        "Terapia de pareja",
-        "Salud mental femenina",
-        "Depresión postparto",
-        "Ansiedad materna",
-        "Psicóloga online Costa Rica",
-        "Psicóloga Heredia",
-        "Psicóloga San José",
-        "Terapia online Costa Rica",
-        "Apoyo emocional maternidad",
-        "Ansiedad posparto",
-        "Duelo y pérdida",
-        "Autoestima y autoconfianza",
-        "Manejo del estrés",
-        "Terapia individual mujeres",
-        "Psicóloga para mamás",
-        "Crisis de pareja",
-        "Comunicación en pareja",
-        "Bienestar emocional femenino"
+        "Psicología clínica","Salud mental materna","Psicología perinatal",
+        "Terapia de pareja","Salud mental femenina","Depresión postparto",
+        "Ansiedad materna","Psicóloga online Costa Rica","Psicóloga Heredia",
+        "Psicóloga San José","Terapia online Costa Rica","Apoyo emocional maternidad",
+        "Ansiedad posparto","Duelo y pérdida","Autoestima y autoconfianza",
+        "Manejo del estrés","Terapia individual mujeres","Psicóloga para mamás",
+        "Crisis de pareja","Comunicación en pareja","Bienestar emocional femenino"
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Servicios de Psicología",
         "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Salud mental materna",
-              "description": "Acompañamiento emocional durante el embarazo, postparto y las diferentes etapas de la maternidad"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Terapia de pareja",
-              "description": "Fortalecimiento de relaciones a través de comunicación efectiva y resolución de conflictos"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Salud mental femenina",
-              "description": "Trabajo de autoestima, manejo del estrés, ansiedad y depresión"
-            }
-          }
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Salud mental materna", "description": "Acompañamiento emocional durante el embarazo, postparto y las diferentes etapas de la maternidad" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Terapia de pareja", "description": "Fortalecimiento de relaciones a través de comunicación efectiva y resolución de conflictos" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Salud mental femenina", "description": "Trabajo de autoestima, manejo del estrés, ansiedad y depresión" } }
         ]
       },
       "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:00",
-          "closes": "18:00"
-        }
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00" }
       ],
       "sameAs": [
         "https://www.instagram.com/ame.psicomamaypareja",
@@ -175,18 +136,9 @@ const currentUrl = Astro.url.href;
       "familyName": "Reyes",
       "jobTitle": "Psicóloga Clínica",
       "description": "Licenciada en Psicología por la Universidad de Costa Rica, especializada en salud mental materna, terapia de pareja y bienestar emocional femenino",
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "Universidad de Costa Rica"
-      },
-      "memberOf": {
-        "@type": "Organization",
-        "name": "Colegio de Profesionales en Psicología de Costa Rica"
-      },
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Psicóloga Amelia Reyes"
-      },
+      "alumniOf": { "@type": "EducationalOrganization", "name": "Universidad de Costa Rica" },
+      "memberOf": { "@type": "Organization", "name": "Colegio de Profesionales en Psicología de Costa Rica" },
+      "worksFor": { "@type": "Organization", "name": "Psicóloga Amelia Reyes" },
       "url": siteUrl,
       "image": siteImageUrl,
       "email": "psicoameliareyes@gmail.com",
@@ -195,80 +147,30 @@ const currentUrl = Astro.url.href;
         "https://www.instagram.com/ame.psicomamaypareja",
         "https://wa.me/50660587256"
       ],
-      "knowsAbout": [
-        "Psicología Clínica",
-        "Psicología Perinatal",
-        "Salud Mental Materna",
-        "Terapia de Pareja",
-        "Salud Mental Femenina"
-      ],
+      "knowsAbout": ["Psicología Clínica","Psicología Perinatal","Salud Mental Materna","Terapia de Pareja","Salud Mental Femenina"],
       "hasCredential": {
         "@type": "EducationalOccupationalCredential",
         "credentialCategory": "Licenciatura",
         "educationalLevel": "Licenciatura en Psicología",
-        "recognizedBy": {
-          "@type": "Organization",
-          "name": "Colegio de Profesionales en Psicología de Costa Rica"
-        },
+        "recognizedBy": { "@type": "Organization", "name": "Colegio de Profesionales en Psicología de Costa Rica" },
         "about": "Código de incorporación: 7942"
       }
     })} />
 
-    <!-- Datos estructurados para Preguntas Frecuentes -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <!-- FAQPage global: solo se renderiza en el home (showGlobalFAQ={true}).
+         Las páginas de servicio tienen su propio FAQPage vía slot "head". -->
+    {showGlobalFAQ && <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Cómo son las sesiones online?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Las sesiones se realizan de forma virtual a través de una plataforma segura. Antes de cada sesión se te enviará un enlace para que puedas conectarte fácilmente desde tu computadora, tablet o teléfono celular. Es importante contar con un espacio privado y una buena conexión a internet para aprovechar mejor el encuentro terapéutico."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuánto dura cada sesión?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cada sesión individual tiene una duración de 50-60 minutos. Las sesiones de terapia de pareja pueden extenderse hasta 90 minutos, dependiendo de las necesidades específicas del proceso."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Con qué frecuencia debo asistir a terapia?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La frecuencia de las sesiones varía según el motivo de consulta y las necesidades de cada persona. Generalmente, los encuentros pueden realizarse cada semana, cada dos semanas o cada tres semanas, según lo que se acuerde durante el proceso terapéutico."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuánto tiempo dura un proceso terapéutico?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "El tiempo del proceso terapéutico depende del motivo de consulta, los objetivos planteados y el ritmo personal de cada paciente. Por esta razón, no existe un tiempo estimado fijo; el proceso se va construyendo de manera individual y respetuosa."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué métodos de pago aceptas?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sesiones online: Sinpe Móvil o transferencia bancaria. Sesiones presenciales: Sinpe Móvil, transferencia bancaria, efectivo o tarjeta."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cómo agendo mi primera cita?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Podés agendar tu cita haciendo clic en el botón que se encuentra al final de la página o contactándome directamente por WhatsApp."
-          }
-        }
+        { "@type": "Question", "name": "¿Cómo son las sesiones online?", "acceptedAnswer": { "@type": "Answer", "text": "Las sesiones se realizan de forma virtual a través de una plataforma segura. Antes de cada sesión se te enviará un enlace para que puedas conectarte fácilmente desde tu computadora, tablet o teléfono celular. Es importante contar con un espacio privado y una buena conexión a internet para aprovechar mejor el encuentro terapéutico." } },
+        { "@type": "Question", "name": "¿Cuánto dura cada sesión?", "acceptedAnswer": { "@type": "Answer", "text": "Cada sesión individual tiene una duración de 50-60 minutos. Las sesiones de terapia de pareja pueden extenderse hasta 90 minutos, dependiendo de las necesidades específicas del proceso." } },
+        { "@type": "Question", "name": "¿Con qué frecuencia debo asistir a terapia?", "acceptedAnswer": { "@type": "Answer", "text": "La frecuencia de las sesiones varía según el motivo de consulta y las necesidades de cada persona. Generalmente, los encuentros pueden realizarse cada semana, cada dos semanas o cada tres semanas, según lo que se acuerde durante el proceso terapéutico." } },
+        { "@type": "Question", "name": "¿Cuánto tiempo dura un proceso terapéutico?", "acceptedAnswer": { "@type": "Answer", "text": "El tiempo del proceso terapéutico depende del motivo de consulta, los objetivos planteados y el ritmo personal de cada paciente. Por esta razón, no existe un tiempo estimado fijo; el proceso se va construyendo de manera individual y respetuosa." } },
+        { "@type": "Question", "name": "¿Qué métodos de pago aceptas?", "acceptedAnswer": { "@type": "Answer", "text": "Sesiones online: Sinpe Móvil o transferencia bancaria. Sesiones presenciales: Sinpe Móvil, transferencia bancaria, efectivo o tarjeta." } },
+        { "@type": "Question", "name": "¿Cómo agendo mi primera cita?", "acceptedAnswer": { "@type": "Answer", "text": "Podés agendar tu cita haciendo clic en el botón que se encuentra al final de la página o contactándome directamente por WhatsApp." } }
       ]
-    })} />
+    })} />}
     
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

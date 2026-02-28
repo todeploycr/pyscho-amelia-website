@@ -1,0 +1,428 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import ameliaProfile from "@/assets/images/amelia-women-therapy.jpeg";
+
+const topicCards = [
+  {
+    icon: "heart",
+    color: "bg-[#CC8989]/20",
+    iconColor: "text-[#CC8989]",
+    title: "Duelos en la maternidad",
+    description:
+      "La evidencia nos muestra que este periodo no es un camino lineal de felicidad. Es un tiempo donde pueden aparecer distintos tipos de duelos: el duelo perinatal o neonatal (cuando el bebé fallece durante el embarazo o poco después del nacimiento), el duelo por una fertilidad que no llega, el duelo de pareja al redefinir la relación después de la llegada de un hijo o hija, y el duelo por la idealización del niño deseado cuando la experiencia real no se parece a lo que se había imaginado y el duelo por la mujer que ya no soy. Estos procesos pueden generar síntomas de ansiedad, depresión o estrés postraumático, y requieren un acompañamiento respetuoso, sin juicios y basado en evidencia.",
+  },
+  {
+    icon: "flower",
+    color: "bg-[#F5DEB3]/60",
+    iconColor: "text-[#183942]",
+    title: "Fertilidad y tratamientos",
+    description:
+      "Muchas mujeres atraviesan procesos de infertilidad o acompañan tratamientos de fertilización asistida. Estos procesos suelen implicar frustración, cansancio emocional, incertidumbre y una montaña rusa de expectativas. Desde la TCC se acompaña a las mujeres (y a las parejas) a manejar la ansiedad anticipatoria, la autocrítica, el miedo al fracaso y el desgaste emocional que puede aparecer en cada etapa del proceso.",
+  },
+  {
+    icon: "baby",
+    color: "bg-[#F4C2C2]/40",
+    iconColor: "text-[#CC8989]",
+    title: "Postparto y dificultades emocionales",
+    description:
+      "Después del parto también pueden presentarse dificultades emocionales significativas. La depresión posparto, la ansiedad posparto, la psicosis posparto y el llamado baby blues son realidades clínicas que requieren acompañamiento oportuno. La evidencia respalda a la TCC como un enfoque eficaz para disminuir síntomas de depresión y ansiedad en el periodo perinatal, promoviendo estrategias de afrontamiento, regulación emocional, autocuidado y reconexión con las propias necesidades.",
+  },
+  {
+    icon: "brain",
+    color: "bg-[#367588]/20",
+    iconColor: "text-[#367588]",
+    title: "Una mirada realista de la maternidad",
+    description:
+      "En este acompañamiento, no romantizamos la maternidad. Sabemos que no siempre hay un vínculo inmediato con el bebé, que pueden aparecer sentimientos ambivalentes, cansancio extremo, culpa, enojo o tristeza. También reconocemos que la lactancia materna, cuando se desea, puede ser un proceso complejo que conlleva expectativas, presiones sociales y, en ocasiones, frustración o dolor emocional. Desde la TCC se trabajan creencias rígidas como \"si no amamanto, no soy buena mamá\", promoviendo una mirada más flexible, respetuosa y compasiva hacia las decisiones individuales y las realidades de cada familia.",
+  },
+];
+
+const siteUrl = "https://psicologaameliareyes.com";
+const pageUrl = `${siteUrl}/terapia-materna`;
+const imageUrl = `${siteUrl}${ameliaProfile.src}`;
+
+// ── Structured Data ────────────────────────────────────────────────────────────
+
+const jsonLdService = {
+  "@context": "https://schema.org",
+  "@type": ["Service", "MedicalBusiness"],
+  "name": "Salud Mental Materna en Costa Rica",
+  "alternateName": "Psicóloga perinatal Costa Rica",
+  "description": "Acompañamiento psicológico especializado durante el embarazo, postparto y crianza en Costa Rica. Apoyo en depresión posparto, duelo perinatal, ansiedad y fertilidad. Atención presencial en Heredia y sesiones online con la Psicóloga Amelia Reyes.",
+  "url": pageUrl,
+  "image": imageUrl,
+  "provider": {
+    "@type": ["Person", "Psychologist"],
+    "name": "Amelia Reyes",
+    "jobTitle": "Psicóloga Clínica",
+    "description": "Psicóloga clínica especializada en salud mental materna y psicología perinatal en Costa Rica.",
+    "url": siteUrl,
+    "telephone": "+50660587256",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Heredia",
+      "addressCountry": "CR",
+    },
+  },
+  "areaServed": [
+    { "@type": "Country", "name": "Costa Rica" },
+    { "@type": "City", "name": "Heredia" },
+    { "@type": "City", "name": "San José" },
+  ],
+  "availableChannel": [
+    { "@type": "ServiceChannel", "serviceType": "Online", "availableLanguage": "es" },
+    {
+      "@type": "ServiceChannel",
+      "serviceType": "Presencial",
+      "serviceLocation": {
+        "@type": "Place",
+        "name": "Consultorio Heredia",
+        "address": { "@type": "PostalAddress", "addressLocality": "Heredia", "addressCountry": "CR" },
+      },
+    },
+  ],
+  "serviceType": "Psicología Perinatal",
+  "audience": { "@type": "Audience", "audienceType": "Madres y mujeres en etapa materna" },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "CRC",
+    "url": "https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Materna",
+  },
+};
+
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "Servicios", "item": `${siteUrl}/#servicios` },
+    { "@type": "ListItem", "position": 3, "name": "Salud Mental Materna", "item": pageUrl },
+  ],
+};
+
+const jsonLdFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué es la psicología perinatal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La psicología perinatal acompaña a las mujeres durante el embarazo, el posparto y las distintas etapas de la crianza. Trabaja el bienestar emocional, la identidad materna, los duelos, la ansiedad, la depresión posparto y los cambios relacionales que ocurren en esta etapa.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es la depresión posparto y cómo se trata?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La depresión posparto es un trastorno del estado de ánimo que puede aparecer después del parto. Se caracteriza por tristeza persistente, agotamiento, dificultad para vincularse con el bebé, ansiedad o sentimientos de culpa. La Terapia Cognitivo-Conductual (TCC) es uno de los enfoques con mayor evidencia para su tratamiento.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "¿Las sesiones de psicología materna son online o presenciales?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ofrezco sesiones tanto online (para cualquier parte de Costa Rica y el exterior) como presenciales en Heredia, Costa Rica. La modalidad se acuerda según las necesidades y posibilidades de cada mamá.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo hacer terapia durante el embarazo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. El embarazo es una etapa de grandes cambios emocionales e identitarios. Iniciar un proceso terapéutico durante el embarazo puede ayudar a prepararte emocionalmente para la llegada del bebé, trabajar miedos, y fortalecer recursos para el posparto.",
+      },
+    },
+  ],
+};
+
+const title = "Salud Mental Materna en Costa Rica | Psicóloga Amelia Reyes | Heredia y Online";
+const description = "Acompañamiento psicológico especializado durante el embarazo, postparto y crianza en Costa Rica. Apoyo en depresión posparto, duelo perinatal y ansiedad materna. Atención presencial en Heredia y sesiones online con la Psicóloga Amelia Reyes.";
+---
+
+<MainLayout title={title} description={description} image={ameliaProfile.src}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdService)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdBreadcrumb)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdFAQ)} />
+
+  <div class="min-h-screen bg-[#F4F0EC]">
+
+    <!-- ===== HERO ===== -->
+    <section class="relative pt-16 pb-10 sm:pt-20 sm:pb-12 md:pt-24 md:pb-16 lg:pt-28 lg:pb-20 overflow-hidden bg-linear-to-br from-[#F4C2C2]/30 via-[#F4F0EC] to-[#F5DEB3]/20">
+      <div class="hidden md:block absolute top-0 right-0 w-80 h-80 bg-[#CC8989]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" aria-hidden="true"></div>
+      <div class="hidden md:block absolute bottom-0 left-0 w-64 h-64 bg-[#F4C2C2]/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none" aria-hidden="true"></div>
+
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+
+        <!-- Breadcrumb visual + semántico -->
+        <nav aria-label="Ruta de navegación" class="mb-6 sm:mb-8 md:mb-10">
+          <ol class="flex items-center gap-1.5 text-sm text-gray-500 flex-wrap">
+            <li>
+              <a href="/" class="hover:text-gray-800 transition-colors inline-flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Inicio
+              </a>
+            </li>
+            <li aria-hidden="true" class="text-gray-300">/</li>
+            <li><a href="/#servicios" class="hover:text-gray-800 transition-colors">Servicios</a></li>
+            <li aria-hidden="true" class="text-gray-300">/</li>
+            <li><span class="text-[#CC8989] font-medium" aria-current="page">Salud Mental Materna</span></li>
+          </ol>
+        </nav>
+
+        <div class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
+
+          <!-- Texto — siempre primero -->
+          <div class="text-center lg:text-left">
+            <span class="inline-block mb-3 px-4 py-1.5 bg-[#CC8989]/20 text-gray-800 rounded-full text-sm font-medium">
+              Servicio especializado · Heredia y Online
+            </span>
+            <h1 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#183942] leading-tight mb-4 md:mb-5">
+              Salud Mental
+              <span class="italic bg-linear-to-br from-[#CC8989] to-[#CC8989]/40 bg-clip-text text-transparent"> Materna</span>
+              <br class="hidden sm:block" />
+              <span class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-gray-500">en Costa Rica</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-500 italic font-display mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
+              Duelo, fertilidad, postparto y una mirada realista de la maternidad. Atención presencial en <strong class="font-medium not-italic text-[#183942]">Heredia</strong> y <strong class="font-medium not-italic text-[#183942]">sesiones online</strong> para toda Costa Rica.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+              <a
+                href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Materna"
+                class="inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-[#367588] text-white text-sm md:text-base font-semibold rounded-full hover:bg-[#367588]/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+                aria-label="Agendar cita de Salud Mental Materna por WhatsApp con Psicóloga Amelia Reyes"
+              >
+                Agenda tu cita
+              </a>
+              <a
+                href="#areas"
+                class="inline-flex items-center justify-center px-6 py-3.5 border-2 border-[#CC8989]/30 text-[#CC8989] text-sm font-semibold rounded-full hover:border-[#CC8989]/60 transition-all duration-300"
+              >
+                Áreas de acompañamiento
+              </a>
+            </div>
+          </div>
+
+          <!-- Imagen — siempre después del texto -->
+          <div class="relative flex justify-center mt-8 sm:mt-10 lg:mt-0">
+            <div class="relative w-full max-w-60 sm:max-w-75 md:max-w-md mx-auto">
+              <div class="absolute -inset-3 bg-linear-to-tr from-[#CC8989]/20 to-[#F4C2C2]/30 rounded-3xl rotate-3" aria-hidden="true"></div>
+              <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-4 border-[#F4C2C2]/70">
+                <img
+                  src={ameliaProfile.src}
+                  alt="Psicóloga Amelia Reyes, especialista en salud mental materna y psicología perinatal en Heredia, Costa Rica"
+                  width={ameliaProfile.width}
+                  height={ameliaProfile.height}
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+              <!-- Pills de modalidad -->
+              <div class="mt-4 flex flex-col sm:flex-row lg:flex-col gap-2">
+                <div class="flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm border border-gray-100 text-sm text-gray-600">
+                  <span class="w-2 h-2 rounded-full bg-green-400 shrink-0" aria-hidden="true"></span>
+                  Sesiones online disponibles
+                </div>
+                <div class="flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm border border-gray-100 text-sm text-gray-600">
+                  <span class="w-2 h-2 rounded-full bg-[#367588] shrink-0" aria-hidden="true"></span>
+                  Presencial en Heredia
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <section class="py-10 sm:py-12 md:py-16 lg:py-20 bg-white" aria-labelledby="content-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-prose mx-auto space-y-5 sm:space-y-6 md:space-y-8">
+
+          <h2 id="content-heading" class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-[#183942] mb-4 md:mb-6">
+            ¿Qué es la salud mental materna?
+          </h2>
+
+          <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+            La salud mental materna abarca el bienestar emocional, psicológico y relacional de las mujeres durante el embarazo, el posparto y las distintas etapas de la crianza. La evidencia científica muestra que este periodo puede venir acompañado de cambios intensos a nivel hormonal, corporal, emocional y de identidad, lo cual puede aumentar la vulnerabilidad a ansiedad, depresión, estrés, culpa, miedos relacionados con la maternidad, dificultades en el vínculo con el bebé o tensiones en la relación de pareja.
+          </p>
+
+          <div class="bg-[#F4C2C2]/20 rounded-xl md:rounded-2xl p-5 sm:p-6 md:p-8 border-l-4 border-[#CC8989]">
+            <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+              Desde el modelo cognitivo-conductual, entendemos que lo que una madre piensa acerca de sí misma, de su bebé y de su rol materno influye directamente en cómo se siente y en cómo actúa. Creencias como <em>"no soy suficiente"</em>, <em>"debería poder con todo"</em>, <em>"si me siento mal, soy una mala mamá"</em> pueden aumentar la culpa, la ansiedad y el agotamiento emocional. La Terapia Cognitivo-Conductual (TCC) trabaja identificando estos pensamientos automáticos y ayudando a construir interpretaciones más realistas, compasivas y funcionales.
+            </p>
+          </div>
+
+          <!-- Señales — keywords long-tail -->
+          <div>
+            <h3 class="font-display text-lg md:text-xl font-semibold text-[#183942] mb-3 md:mb-4">
+              ¿Cuándo buscar apoyo psicológico en la maternidad?
+            </h3>
+            <ul class="space-y-2 text-sm md:text-base text-gray-600" role="list">
+              {[
+                "Tristeza persistente, llanto frecuente o sensación de vacío después del parto",
+                "Ansiedad intensa, miedos exagerados o pensamientos intrusivos sobre el bebé",
+                "Dificultad para vincularte con tu bebé o sentirte \"buena mamá\"",
+                "Agotamiento emocional durante el embarazo o la crianza",
+                "Duelo perinatal, pérdida gestacional o duelo por fertilidad",
+                "Deseo de prepararte emocionalmente antes de la llegada del bebé",
+              ].map((item) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1.5 shrink-0 w-3.5 h-3.5 rounded-full bg-[#CC8989]/20 flex items-center justify-center" aria-hidden="true">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#CC8989]"></span>
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ÁREAS DE ACOMPAÑAMIENTO ===== -->
+    <section id="areas" class="py-10 sm:py-12 md:py-16 lg:py-20 bg-[#F4F0EC]" aria-labelledby="areas-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+        <h2 id="areas-heading" class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-[#183942] text-center mb-8 sm:mb-10 md:mb-16">
+          Áreas de <span class="text-[#CC8989]">acompañamiento</span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-8 max-w-5xl mx-auto">
+          {topicCards.map((card) => (
+            <div class="bg-white rounded-2xl md:rounded-3xl p-5 sm:p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
+              <div class={`w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 ${card.color} rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6`} aria-hidden="true">
+                {card.icon === "heart" && (
+                  <svg class={`w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 ${card.iconColor}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                )}
+                {card.icon === "flower" && (
+                  <svg class={`w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 ${card.iconColor}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m7.5 0a4.5 4.5 0 1 1-4.5 4.5m4.5-4.5H15m-3 4.5V15"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                )}
+                {card.icon === "baby" && (
+                  <svg class={`w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 ${card.iconColor}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 12h.01M15 12h.01M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/>
+                    <path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 3"/>
+                  </svg>
+                )}
+                {card.icon === "brain" && (
+                  <svg class={`w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 ${card.iconColor}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+                    <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+                    <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
+                    <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/>
+                    <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/>
+                    <path d="M3.477 10.896a4 4 0 0 1 .585-.396"/>
+                    <path d="M19.938 10.5a4 4 0 0 1 .585.396"/>
+                    <path d="M6 18a4 4 0 0 1-1.967-.516"/>
+                    <path d="M19.967 17.484A4 4 0 0 1 18 18"/>
+                  </svg>
+                )}
+              </div>
+              <h3 class="font-display text-base sm:text-lg md:text-xl font-semibold text-[#183942] mb-2 sm:mb-3 md:mb-4">
+                {card.title}
+              </h3>
+              <p class="text-sm md:text-base text-gray-600 leading-relaxed">
+                {card.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOCAL SEO ===== -->
+    <section class="py-10 sm:py-12 md:py-16 bg-white" aria-labelledby="local-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 id="local-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] mb-4">
+            Psicóloga perinatal en <span class="text-[#CC8989]">Heredia, Costa Rica</span>
+          </h2>
+          <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+            Si buscás una psicóloga perinatal o apoyo en salud mental materna en Heredia, ofrezco atención presencial en consultorio y sesiones online para todo el país. El espacio terapéutico está diseñado para acompañarte sin juicios, con respeto por tu proceso y basado en evidencia científica.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="py-10 sm:py-12 md:py-16 bg-[#F4F0EC]" aria-labelledby="faq-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+          <h2 id="faq-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] text-center mb-8 md:mb-10">
+            Preguntas frecuentes
+          </h2>
+          <dl class="space-y-4">
+            <div class="bg-white rounded-xl p-5 sm:p-6">
+              <dt class="font-semibold text-[#183942] text-base mb-2">¿Qué es la psicología perinatal?</dt>
+              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">La psicología perinatal acompaña a las mujeres durante el embarazo, el posparto y las distintas etapas de la crianza. Trabaja el bienestar emocional, la identidad materna, los duelos, la ansiedad, la depresión posparto y los cambios relacionales que ocurren en esta etapa.</dd>
+            </div>
+            <div class="bg-white rounded-xl p-5 sm:p-6">
+              <dt class="font-semibold text-[#183942] text-base mb-2">¿Qué es la depresión posparto y cómo se trata?</dt>
+              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">La depresión posparto es un trastorno del estado de ánimo que puede aparecer después del parto. Se caracteriza por tristeza persistente, agotamiento, dificultad para vincularse con el bebé, ansiedad o sentimientos de culpa. La Terapia Cognitivo-Conductual (TCC) es uno de los enfoques con mayor evidencia para su tratamiento.</dd>
+            </div>
+            <div class="bg-white rounded-xl p-5 sm:p-6">
+              <dt class="font-semibold text-[#183942] text-base mb-2">¿Las sesiones son online o presenciales?</dt>
+              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">Ofrezco sesiones tanto online (para cualquier parte de Costa Rica y el exterior) como presenciales en Heredia, Costa Rica. La modalidad se acuerda según las necesidades y posibilidades de cada mamá.</dd>
+            </div>
+            <div class="bg-white rounded-xl p-5 sm:p-6">
+              <dt class="font-semibold text-[#183942] text-base mb-2">¿Puedo hacer terapia durante el embarazo?</dt>
+              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">Sí. El embarazo es una etapa de grandes cambios emocionales e identitarios. Iniciar un proceso terapéutico durante el embarazo puede ayudarte a prepararte emocionalmente para la llegada del bebé, trabajar miedos, y fortalecer recursos para el posparto.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CIERRE CON CITA Y CTA ===== -->
+    <section class="py-10 sm:py-12 md:py-16 lg:py-20 bg-linear-to-br from-[#CC8989]/10 via-[#F4C2C2]/10 to-[#F5DEB3]/10" aria-labelledby="cta-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto text-center">
+
+          <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#CC8989]/20 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6 md:mb-8" aria-hidden="true">
+            <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 14H9a1 1 0 0 1 0-2h3.5"/>
+              <path d="M16 14h-1"/>
+              <path d="M16 8h1a2 2 0 0 1 0 4h-1"/>
+              <path d="M8 10V7a3 3 0 0 1 6 0v3"/>
+              <path d="M5 20v-5a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v5"/>
+              <path d="M12 6c.34-.5.76-1 1-1.5a3.5 3.5 0 0 1 5 5c-.5.5-1.17 1-1.5 1.5"/>
+            </svg>
+          </div>
+
+          <h2 id="cta-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] mb-4 md:mb-5">
+            ¿Querés acompañamiento en tu maternidad?
+          </h2>
+
+          <blockquote class="font-display text-base sm:text-lg md:text-xl text-[#183942] leading-relaxed mb-7 sm:mb-8 md:mb-10 px-2 sm:px-0">
+            "La terapia cognitivo-conductual no busca enseñar <em>cómo ser mamá</em> ni imponer un modelo ideal de maternidad. Busca acompañar a cada mujer en su proceso único, validando su experiencia, su dolor, sus cambios y sus desafíos, para construir una maternidad más consciente, más humana y más sostenible para su salud mental."
+            <footer class="mt-3 text-sm text-gray-500 not-italic">— Psicóloga Amelia Reyes</footer>
+          </blockquote>
+
+          <a
+            href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Materna"
+            class="inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-[#367588] text-white text-sm md:text-base font-semibold rounded-full hover:bg-[#367588]/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+            aria-label="Agendar cita de Salud Mental Materna con Psicóloga Amelia Reyes por WhatsApp"
+          >
+            Quiero agendar mi cita
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</MainLayout>
