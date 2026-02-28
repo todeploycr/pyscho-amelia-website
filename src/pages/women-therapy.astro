@@ -1,0 +1,250 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import ameliaProfile from "@/assets/images/amelia-women-therapy.jpeg";
+
+const therapeuticGoals = [
+  {
+    icon: "shield-alert",
+    text: "Identificar pensamientos automáticos que generan culpa, ansiedad o sensación de insuficiencia.",
+  },
+  {
+    icon: "sparkles",
+    text: "Cuestionar mandatos sociales y creencias rígidas que afectan la autoestima y el autocuidado.",
+  },
+  {
+    icon: "heart-pulse",
+    text: "Desarrollar habilidades para el manejo del estrés, la regulación emocional y la toma de decisiones.",
+  },
+  {
+    icon: "flame",
+    text: "Fortalecer la capacidad de poner límites sanos en las relaciones.",
+  },
+  {
+    icon: "hand-heart",
+    text: "Promover una relación más compasiva con el propio cuerpo, las emociones y las etapas de vida.",
+  },
+];
+
+const siteUrl = "https://psicologaameliareyes.com";
+const pageUrl = `${siteUrl}/salud-mental-femenina`;
+const imageUrl = `${siteUrl}${ameliaProfile.src}`;
+
+const jsonLdService = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Salud Mental Femenina",
+  "description": "Terapia psicológica especializada para mujeres en Costa Rica. Abordaje de ansiedad, autoestima, estrés y agotamiento emocional con enfoque cognitivo-conductual.",
+  "url": pageUrl,
+  "image": imageUrl,
+  "provider": {
+    "@type": "Person",
+    "name": "Amelia Reyes",
+    "jobTitle": "Psicóloga Clínica",
+    "url": siteUrl,
+  },
+  "areaServed": { "@type": "Country", "name": "Costa Rica" },
+  "availableChannel": { "@type": "ServiceChannel", "serviceType": "Online", "availableLanguage": "es" },
+  "serviceType": "Psicología Clínica",
+  "audience": { "@type": "Audience", "audienceType": "Mujeres adultas" },
+};
+
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "Servicios", "item": `${siteUrl}/#servicios` },
+    { "@type": "ListItem", "position": 3, "name": "Salud Mental Femenina", "item": pageUrl },
+  ],
+};
+---
+
+<MainLayout
+  title="Salud Mental Femenina | Psicóloga Amelia Reyes | Costa Rica"
+  description="Terapia psicológica especializada para mujeres en Costa Rica. Trabajá la ansiedad, autoestima, estrés y agotamiento emocional con enfoque cognitivo-conductual. Sesiones online con la Psicóloga Amelia Reyes."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdService)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdBreadcrumb)} />
+
+  <div class="min-h-screen bg-[#F4F0EC]">
+
+    <!-- ===== HERO ===== -->
+    <!-- mobile: pt-20, tablet: pt-24, desktop: pt-28 -->
+    <section class="relative pt-20 pb-12 md:pt-24 md:pb-16 lg:pt-28 lg:pb-20 overflow-hidden bg-[#F4F0EC]">
+
+      <!-- Círculos decorativos — ocultos en mobile, visibles desde md -->
+      <div class="hidden md:block absolute top-20 right-16 w-28 h-28 lg:w-36 lg:h-36 border border-[#CC8989]/15 rounded-full pointer-events-none"></div>
+      <div class="hidden md:block absolute top-36 right-28 w-16 h-16 lg:w-20 lg:h-20 border border-[#F5DEB3]/25 rounded-full pointer-events-none"></div>
+
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+
+        <!-- Volver al inicio -->
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-8 md:mb-10"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Volver al inicio
+        </a>
+
+        <!--
+          mobile:  1 columna, texto arriba / imagen abajo
+          tablet:  1 columna centrada con imagen más pequeña
+          desktop: 2 columnas, imagen izquierda / texto derecha
+        -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
+
+          <!-- IMAGEN -->
+          <!-- mobile: order-2 (debajo del texto), desktop: order-1 (izquierda) -->
+          <div class="relative order-2 lg:order-1">
+            <div class="relative w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto">
+              <!-- Blob detrás -->
+              <div class="absolute -inset-3 md:-inset-4 bg-linear-to-tr from-[#F5DEB3]/40 to-[#CC8989]/20 rounded-4xl md:rounded-[3rem] rotate-1"></div>
+              <!-- Imagen -->
+              <div class="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden border-4 border-[#F4C2C2]/70 shadow-lg">
+                <img
+                  src={ameliaProfile.src}
+                  alt="Psicóloga Amelia Reyes, especialista en salud mental femenina en Costa Rica"
+                  width={ameliaProfile.width}
+                  height={ameliaProfile.height}
+                  loading="eager"
+                  fetchpriority="high"
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- TEXTO -->
+          <!-- mobile: order-1 (arriba), desktop: order-2 (derecha) -->
+          <div class="order-1 lg:order-2 text-center lg:text-left">
+            <span class="inline-block mb-3 md:mb-4 px-4 py-1.5 bg-[#F5DEB3]/50 text-gray-700 rounded-full text-sm font-medium">
+              Servicio especializado
+            </span>
+            <h1 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#183942] leading-tight mb-4 md:mb-6">
+              Salud Mental
+              <span class="italic bg-linear-to-br from-[#CC8989]/60 to-[#CC8989]/80 bg-clip-text text-transparent"> Femenina</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
+              Un acompañamiento para mujeres que buscan construir una relación más equilibrada consigo mismas, con sus vínculos y con las demandas del entorno.
+            </p>
+            <a
+              href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina"
+              class="inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-[#367588] text-white text-sm md:text-base font-semibold rounded-full hover:bg-[#367588]/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              aria-label="Agendar cita de Salud Mental Femenina por WhatsApp"
+            >
+              Agenda tu cita
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTEXTO ===== -->
+    <section class="py-12 md:py-16 lg:py-20 bg-white" aria-labelledby="context-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto space-y-6 md:space-y-8">
+          <h2 id="context-heading" class="sr-only">¿Qué es la salud mental femenina?</h2>
+
+          <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+            La salud mental femenina reconoce que las mujeres enfrentan, a lo largo de su vida, múltiples transiciones biológicas, sociales y relacionales que impactan su bienestar emocional: cambios hormonales, presiones sociales sobre el rol de género, exigencias laborales y familiares, maternidad, duelos, rupturas, experiencias de violencia, entre otros. La evidencia muestra que estos factores pueden influir en una mayor prevalencia de ansiedad, depresión, trastornos del estado de ánimo y altos niveles de autoexigencia y culpa en las mujeres.
+          </p>
+
+          <div class="bg-gray-50 rounded-xl md:rounded-2xl p-6 md:p-8 border-l-4 border-[#F5DEB3]">
+            <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+              Desde el modelo cognitivo-conductual, se comprende que muchas mujeres han aprendido creencias que refuerzan el sacrificio personal, la responsabilidad excesiva por el bienestar de otros o la necesidad de cumplir con ideales inalcanzables (<em>"tengo que poder con todo"</em>, <em>"no puedo fallar"</em>, <em>"si descanso, soy egoísta"</em>). Estas creencias pueden sostener patrones de agotamiento, postergación de las propias necesidades y dificultades para poner límites.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== OBJETIVOS TERAPÉUTICOS - TIMELINE ===== -->
+    <section class="py-12 md:py-16 lg:py-20 bg-[#F4F0EC]" aria-labelledby="goals-heading">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+        <h2 id="goals-heading" class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-[#183942] text-center mb-3 md:mb-4">
+          El acompañamiento <span class="text-[#CC8989]">terapéutico</span> busca
+        </h2>
+        <p class="text-sm md:text-base text-gray-500 text-center mb-10 md:mb-16 max-w-sm md:max-w-lg mx-auto">
+          Objetivos claros para tu bienestar emocional
+        </p>
+
+        <!-- Timeline — full width en mobile, centrado y acotado en tablet/desktop -->
+        <div class="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
+          {therapeuticGoals.map((goal, index) => (
+            <div class="relative flex items-start gap-4 md:gap-6 pb-8 md:pb-10 last:pb-0">
+              {index < therapeuticGoals.length - 1 && (
+                <div class="absolute left-5 md:left-6 top-12 md:top-14 w-0.5 h-full bg-linear-to-b from-[#CC8989]/25 to-[#F5DEB3]/25"></div>
+              )}
+              <!-- Ícono: más pequeño en mobile -->
+              <div class="relative z-10 shrink-0 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#CC8989]/20">
+                {goal.icon === "shield-alert" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                )}
+                {goal.icon === "sparkles" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/>
+                    <path d="M5 3l.8 2.2L8 6l-2.2.8L5 9l-.8-2.2L2 6l2.2-.8z"/>
+                    <path d="M19 13l.8 2.2 2.2.8-2.2.8L19 19l-.8-2.2L16 16l2.2-.8z"/>
+                  </svg>
+                )}
+                {goal.icon === "heart-pulse" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 7.65l1.06 1.06L12 21.23l7.36-7.94 1.06-1.06a5.4 5.4 0 0 0 0-7.65z"/>
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                )}
+                {goal.icon === "flame" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/>
+                  </svg>
+                )}
+                {goal.icon === "hand-heart" && (
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M11 14H9a1 1 0 0 1 0-2h3.5"/>
+                    <path d="M16 14h-1"/>
+                    <path d="M16 8h1a2 2 0 0 1 0 4h-1"/>
+                    <path d="M8 10V7a3 3 0 0 1 6 0v3"/>
+                    <path d="M5 20v-5a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v5"/>
+                    <path d="M12 6c.34-.5.76-1 1-1.5a3.5 3.5 0 0 1 5 5c-.5.5-1.17 1-1.5 1.5"/>
+                  </svg>
+                )}
+              </div>
+              <!-- Card -->
+              <div class="bg-white rounded-xl md:rounded-2xl p-4 md:p-5 shadow-sm flex-1 border border-gray-100">
+                <p class="text-sm md:text-base text-gray-700 leading-relaxed">{goal.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EVIDENCIA & CTA ===== -->
+    <section class="py-12 md:py-16 lg:py-20 bg-[#F4F0EC]">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto text-center">
+          <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-8 md:mb-10">
+            La terapia cognitivo-conductual cuenta con sólida evidencia en el tratamiento de la ansiedad, la depresión y el estrés crónico, y resulta especialmente útil para acompañar a mujeres que buscan construir una relación más equilibrada consigo mismas, con sus vínculos y con las demandas del entorno.
+          </p>
+          <a
+            href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina"
+            class="inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-[#367588] text-white text-sm md:text-base font-semibold rounded-full hover:bg-[#367588]/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            aria-label="Agendar cita de Salud Mental Femenina por WhatsApp"
+          >
+            Quiero agendar mi cita
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</MainLayout>
