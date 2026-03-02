@@ -47,7 +47,7 @@ const jsonLdService = {
   "@context": "https://schema.org",
   "@type": ["Service", "MedicalBusiness"],
   "name": "Salud Mental Materna en Costa Rica",
-  "alternateName": "Psicóloga perinatal Costa Rica",
+  "alternateName": "Psicóloga materna Costa Rica",
   "description": "Acompañamiento psicológico especializado durante el embarazo, postparto y crianza en Costa Rica. Apoyo en depresión posparto, duelo perinatal, ansiedad y fertilidad. Atención presencial en Heredia y sesiones online con la Psicóloga Amelia Reyes.",
   "url": pageUrl,
   "image": imageUrl,
@@ -55,7 +55,7 @@ const jsonLdService = {
     "@type": ["Person", "Psychologist"],
     "name": "Amelia Reyes",
     "jobTitle": "Psicóloga Clínica",
-    "description": "Psicóloga clínica especializada en salud mental materna y psicología perinatal en Costa Rica.",
+    "description": "Psicóloga clínica especializada en salud mental materna en Costa Rica.",
     "url": siteUrl,
     "telephone": "+50660587256",
     "address": {
@@ -81,7 +81,7 @@ const jsonLdService = {
       },
     },
   ],
-  "serviceType": "Psicología Perinatal",
+  "serviceType": "Psicología Materna",
   "audience": { "@type": "Audience", "audienceType": "Madres y mujeres en etapa materna" },
   "offers": {
     "@type": "Offer",
@@ -107,10 +107,10 @@ const jsonLdFAQ = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "¿Qué es la psicología perinatal?",
+      "name": "¿Qué es la psicología materna?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "La psicología perinatal acompaña a las mujeres durante el embarazo, el posparto y las distintas etapas de la crianza. Trabaja el bienestar emocional, la identidad materna, los duelos, la ansiedad, la depresión posparto y los cambios relacionales que ocurren en esta etapa.",
+        "text": "La psicología materna acompaña a las mujeres durante el embarazo, el posparto y las distintas etapas de la crianza. Trabaja el bienestar emocional, la identidad materna, los duelos, la ansiedad, la depresión posparto y los cambios relacionales que ocurren en esta etapa.",
       },
     },
     {
@@ -216,7 +216,7 @@ const description = "Acompañamiento psicológico especializado durante el embar
               <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-4 border-[#F4C2C2]/70">
                 <img
                   src={ameliaProfile.src}
-                  alt="Psicóloga Amelia Reyes, especialista en salud mental materna y psicología perinatal en Heredia, Costa Rica"
+                  alt="Psicóloga Amelia Reyes, especialista en salud mental materna y psicología materna en Heredia, Costa Rica"
                   width={ameliaProfile.width}
                   height={ameliaProfile.height}
                   loading="eager"
@@ -338,10 +338,10 @@ const description = "Acompañamiento psicológico especializado durante el embar
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
           <h2 id="local-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] mb-4">
-            Psicóloga perinatal en <span class="text-[#CC8989]">Heredia, Costa Rica</span>
+            Psicóloga materna en <span class="text-[#CC8989]">Heredia, Costa Rica</span>
           </h2>
           <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-            Si buscás una psicóloga perinatal o apoyo en salud mental materna en Heredia, ofrezco atención presencial en consultorio y sesiones online para todo el país. El espacio terapéutico está diseñado para acompañarte sin juicios, con respeto por tu proceso y basado en evidencia científica.
+            Si buscás apoyo en salud mental materna en Heredia, ofrezco atención presencial en consultorio y sesiones online para todo el país. El espacio terapéutico está diseñado para acompañarte sin juicios, con respeto por tu proceso y basado en evidencia científica.
           </p>
         </div>
       </div>
@@ -355,10 +355,6 @@ const description = "Acompañamiento psicológico especializado durante el embar
             Preguntas frecuentes
           </h2>
           <dl class="space-y-4">
-            <div class="bg-white rounded-xl p-5 sm:p-6">
-              <dt class="font-semibold text-[#183942] text-base mb-2">¿Qué es la psicología perinatal?</dt>
-              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">La psicología perinatal acompaña a las mujeres durante el embarazo, el posparto y las distintas etapas de la crianza. Trabaja el bienestar emocional, la identidad materna, los duelos, la ansiedad, la depresión posparto y los cambios relacionales que ocurren en esta etapa.</dd>
-            </div>
             <div class="bg-white rounded-xl p-5 sm:p-6">
               <dt class="font-semibold text-[#183942] text-base mb-2">¿Qué es la depresión posparto y cómo se trata?</dt>
               <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">La depresión posparto es un trastorno del estado de ánimo que puede aparecer después del parto. Se caracteriza por tristeza persistente, agotamiento, dificultad para vincularse con el bebé, ansiedad o sentimientos de culpa. La Terapia Cognitivo-Conductual (TCC) es uno de los enfoques con mayor evidencia para su tratamiento.</dd>
