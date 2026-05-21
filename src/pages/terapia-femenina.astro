@@ -4,32 +4,59 @@ import ameliaProfile from "@/assets/images/amelia-women-therapy.jpeg";
 
 const therapeuticGoals = [
   {
-    icon: "shield-alert",
-    text: "Identificar pensamientos automáticos que generan culpa, ansiedad o sensación de insuficiencia.",
+    number: "01",
+    title: "Pensamientos automáticos",
+    description: "Identificar pensamientos automáticos que generan culpa, ansiedad o sensación de insuficiencia.",
   },
   {
-    icon: "sparkles",
-    text: "Cuestionar mandatos sociales y creencias rígidas que afectan la autoestima y el autocuidado.",
+    number: "02",
+    title: "Mandatos y creencias",
+    description: "Cuestionar mandatos sociales y creencias rígidas que afectan la autoestima y el autocuidado.",
   },
   {
-    icon: "heart-pulse",
-    text: "Desarrollar habilidades para el manejo del estrés, la regulación emocional y la toma de decisiones.",
+    number: "03",
+    title: "Regulación emocional",
+    description: "Desarrollar habilidades para el manejo del estrés, la regulación emocional y la toma de decisiones.",
   },
   {
-    icon: "flame",
-    text: "Fortalecer la capacidad de poner límites sanos en las relaciones.",
+    number: "04",
+    title: "Límites sanos",
+    description: "Fortalecer la capacidad de poner límites sanos en las relaciones.",
   },
   {
-    icon: "hand-heart",
-    text: "Promover una relación más compasiva con el propio cuerpo, las emociones y las etapas de vida.",
+    number: "05",
+    title: "Autocompasión",
+    description: "Promover una relación más compasiva con el propio cuerpo, las emociones y las etapas de vida.",
+  },
+];
+
+const signals = [
+  "Ansiedad frecuente, preocupación excesiva o dificultad para descansar",
+  "Agotamiento emocional o sensación de no poder más",
+  "Baja autoestima, autocrítica intensa o dificultad para valorarte",
+  "Dificultad para poner límites en relaciones personales o laborales",
+  "Momentos de cambio: maternidad, separación, duelo, transiciones laborales",
+  "Deseo de conocerte mejor y construir una vida más alineada con tus valores",
+];
+
+const faqs = [
+  {
+    q: "¿Qué es la terapia psicológica para mujeres?",
+    a: "Es un acompañamiento especializado que reconoce los factores biológicos, sociales y relacionales propios de la experiencia femenina: presiones de género, autoexigencia, agotamiento emocional, dificultad para poner límites y baja autoestima. Trabaja desde un enfoque cognitivo-conductual basado en evidencia.",
+  },
+  {
+    q: "¿Cómo sé si necesito terapia psicológica?",
+    a: "Podría ser útil si experimentás ansiedad frecuente, agotamiento emocional, dificultad para poner límites, baja autoestima, sensación de no poder con todo, o si atravesás una etapa de cambio o crisis emocional. No es necesario estar en crisis para iniciar un proceso terapéutico.",
+  },
+  {
+    q: "¿Las sesiones son online o presenciales?",
+    a: "Ofrezco sesiones tanto online (para cualquier parte de Costa Rica y el exterior) como presenciales en Heredia, Costa Rica. La modalidad se acuerda según lo que mejor se adapte a cada persona.",
   },
 ];
 
 const siteUrl = "https://psicologaameliareyes.com";
 const pageUrl = `${siteUrl}/salud-mental-femenina`;
 const imageUrl = `${siteUrl}${ameliaProfile.src}`;
-
-// ── Structured Data ────────────────────────────────────────────────────────────
 
 const jsonLdService = {
   "@context": "https://schema.org",
@@ -56,18 +83,6 @@ const jsonLdService = {
     { "@type": "Country", "name": "Costa Rica" },
     { "@type": "City", "name": "Heredia" },
     { "@type": "City", "name": "San José" },
-  ],
-  "availableChannel": [
-    { "@type": "ServiceChannel", "serviceType": "Online", "availableLanguage": "es" },
-    {
-      "@type": "ServiceChannel",
-      "serviceType": "Presencial",
-      "serviceLocation": {
-        "@type": "Place",
-        "name": "Consultorio Heredia",
-        "address": { "@type": "PostalAddress", "addressLocality": "Heredia", "addressCountry": "CR" },
-      },
-    },
   ],
   "serviceType": "Psicología Clínica Femenina",
   "audience": { "@type": "Audience", "audienceType": "Mujeres adultas" },
@@ -129,257 +144,324 @@ const description = "Terapia psicológica especializada para mujeres en Costa Ri
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdBreadcrumb)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdFAQ)} />
 
-  <div class="min-h-screen bg-[#F4F0EC]">
+  {/* Google Fonts */}
+  <link
+    slot="head"
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap"
+  />
 
-    <!-- ===== HERO ===== -->
-    <section class="relative pt-16 pb-10 sm:pt-20 sm:pb-12 md:pt-24 md:pb-16 lg:pt-28 lg:pb-20 overflow-hidden bg-[#F4F0EC]">
+  <div class="font-dm-sans bg-[#F4F0EC] text-[#183942]">
 
-      <div class="hidden md:block absolute top-20 right-16 w-28 h-28 lg:w-36 lg:h-36 border border-[#CC8989]/15 rounded-full pointer-events-none" aria-hidden="true"></div>
-      <div class="hidden md:block absolute top-36 right-28 w-16 h-16 lg:w-20 lg:h-20 border border-[#F5DEB3]/25 rounded-full pointer-events-none" aria-hidden="true"></div>
-
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-
-        <!-- Breadcrumb visual + semántico -->
-        <nav aria-label="Ruta de navegación" class="mb-6 sm:mb-8 md:mb-10">
-          <ol class="flex items-center gap-1.5 text-sm text-gray-500 flex-wrap">
-            <li>
-              <a href="/" class="hover:text-gray-800 transition-colors inline-flex items-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                Inicio
-              </a>
-            </li>
-            <li aria-hidden="true" class="text-gray-300">/</li>
-            <li><a href="/#servicios" class="hover:text-gray-800 transition-colors">Servicios</a></li>
-            <li aria-hidden="true" class="text-gray-300">/</li>
-            <li><span class="text-[#CC8989] font-medium" aria-current="page">Salud Mental Femenina</span></li>
-          </ol>
+    {/* ===== HERO ===== */}
+    <section
+      class="grid grid-cols-2 relative overflow-hidden min-h-130 max-[1100px]:min-h-120 max-[900px]:grid-cols-1 max-[900px]:h-auto"
+      aria-label="Salud Mental Femenina en Costa Rica"
+    >
+      {/* Hero Left */}
+      <div class="flex flex-col justify-center py-24 pr-12 pl-[5vw] pt-24 relative z-10 overflow-hidden max-[900px]:px-6 max-[900px]:pt-20 max-[900px]:pb-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Ruta de navegación" class="flex items-center gap-2 text-xs text-[#8aabb3] mb-8">
+          <a href="/" class="hover:text-[#183942] transition-colors">Inicio</a>
+          <span class="text-[#ccc]">/</span>
+          <a href="/#servicios" class="hover:text-[#183942] transition-colors">Servicios</a>
+          <span class="text-[#ccc]">/</span>
+          <span class="text-[#183942] font-medium" aria-current="page">Salud Mental Femenina</span>
         </nav>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
-
-          <!-- TEXTO — siempre primero -->
-          <div class="text-center lg:text-left">
-            <span class="inline-block mb-3 md:mb-4 px-4 py-1.5 bg-[#F5DEB3]/50 text-gray-700 rounded-full text-sm font-medium">
-              Servicio especializado
-            </span>
-            <h1 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#183942] leading-tight mb-4 md:mb-5">
-              Salud Mental
-              <span class="italic bg-linear-to-br from-[#CC8989]/60 to-[#CC8989]/80 bg-clip-text text-transparent"> Femenina</span>
-              <br class="hidden sm:block" />
-              <span class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-[#183942]">en Costa Rica</span>
-            </h1>
-            <p class="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
-              Un acompañamiento para mujeres que buscan construir una relación más equilibrada consigo mismas, con sus vínculos y con las demandas del entorno. Atención presencial en <strong class="font-medium text-[#183942]">Heredia</strong> y <strong class="font-medium text-[#183942]">sesiones online</strong> para toda Costa Rica.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-              <a
-                href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina"
-                class="inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-[#367588] text-white text-sm md:text-base font-semibold rounded-full hover:bg-[#367588]/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
-                aria-label="Agendar cita de Salud Mental Femenina por WhatsApp con Psicóloga Amelia Reyes"
-              >
-                Agenda tu cita
-              </a>
-              <a
-                href="#acompanamiento"
-                class="inline-flex items-center justify-center px-6 py-3.5 border-2 border-[#CC8989]/30 text-[#CC8989] text-sm font-semibold rounded-full hover:border-[#CC8989]/60 transition-all duration-300"
-              >
-                Cómo te acompaño
-              </a>
-            </div>
-          </div>
-
-          <!-- IMAGEN — después del texto -->
-          <div class="relative mt-8 sm:mt-10 lg:mt-0">
-            <div class="relative w-full max-w-60 sm:max-w-75 md:max-w-md mx-auto">
-              <div class="absolute -inset-3 md:-inset-4 bg-linear-to-tr from-[#F5DEB3]/40 to-[#CC8989]/20 rounded-3xl rotate-1" aria-hidden="true"></div>
-              <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden border-4 border-[#F4C2C2]/70 shadow-lg">
-                <img
-                  src={ameliaProfile.src}
-                  alt="Psicóloga Amelia Reyes, especialista en salud mental femenina en Heredia, Costa Rica"
-                  width={ameliaProfile.width}
-                  height={ameliaProfile.height}
-                  loading="eager"
-                  fetchpriority="high"
-                  decoding="async"
-                  class="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
-          </div>
-
+        {/* Tag */}
+        <div class="inline-block text-[0.7rem] font-medium tracking-[0.18em] uppercase text-[#CC8989] border border-[#CC8989] px-[0.9rem] py-[0.35rem] rounded-sm mb-8 w-fit">
+          Servicio especializado
         </div>
-      </div>
-    </section>
 
-    <!-- ===== CONTEXTO ===== -->
-    <section class="py-10 sm:py-12 md:py-16 lg:py-20 bg-white" aria-labelledby="context-heading">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto space-y-5 sm:space-y-6 md:space-y-8">
-          <h2 id="context-heading" class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-[#183942] mb-4 md:mb-6">
-            ¿Qué es la terapia psicológica para mujeres?
-          </h2>
+        {/* Heading */}
+        <h1 class="font-cormorant font-light leading-[1.05] text-[#183942] mb-7" style="font-size: clamp(3rem, 6vw, 5.5rem)">
+          Salud Mental<br />
+          <em class="italic text-[#CC8989]">Femenina</em><br />
+          <span class="text-[0.75em] text-[#183942]">en Costa Rica</span>
+        </h1>
 
-          <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-            La salud mental femenina reconoce que las mujeres enfrentan, a lo largo de su vida, múltiples transiciones biológicas, sociales y relacionales que impactan su bienestar emocional: cambios hormonales, presiones sociales sobre el rol de género, exigencias laborales y familiares, maternidad, duelos, rupturas, experiencias de violencia, entre otros. La evidencia muestra que estos factores pueden influir en una mayor prevalencia de ansiedad, depresión, trastornos del estado de ánimo y altos niveles de autoexigencia y culpa en las mujeres.
-          </p>
-
-          <div class="bg-gray-50 rounded-xl md:rounded-2xl p-5 sm:p-6 md:p-8 border-l-4 border-[#F5DEB3]">
-            <p class="text-sm md:text-base text-gray-700 leading-relaxed">
-              Desde el modelo cognitivo-conductual, se comprende que muchas mujeres han aprendido creencias que refuerzan el sacrificio personal, la responsabilidad excesiva por el bienestar de otros o la necesidad de cumplir con ideales inalcanzables (<em>"tengo que poder con todo"</em>, <em>"no puedo fallar"</em>, <em>"si descanso, soy egoísta"</em>). Estas creencias pueden sostener patrones de agotamiento, postergación de las propias necesidades y dificultades para poner límites.
-            </p>
-          </div>
-
-          <!-- Señales — keywords long-tail -->
-          <div>
-            <h3 class="font-display text-lg md:text-xl font-semibold text-[#183942] mb-3 md:mb-4">
-              ¿Cuándo buscar terapia psicológica?
-            </h3>
-            <ul class="space-y-2 text-sm md:text-base text-gray-600" role="list">
-              {[
-                "Ansiedad frecuente, preocupación excesiva o dificultad para descansar",
-                "Agotamiento emocional o sensación de no poder más",
-                "Baja autoestima, autocrítica intensa o dificultad para valorarte",
-                "Dificultad para poner límites en relaciones personales o laborales",
-                "Momentos de cambio: maternidad, separación, duelo, transiciones laborales",
-                "Deseo de conocerte mejor y construir una vida más alineada con tus valores",
-              ].map((item) => (
-                <li class="flex items-start gap-2">
-                  <span class="mt-1.5 shrink-0 w-3.5 h-3.5 rounded-full bg-[#CC8989]/20 flex items-center justify-center" aria-hidden="true">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#CC8989]"></span>
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== OBJETIVOS TERAPÉUTICOS ===== -->
-    <section id="acompanamiento" class="py-10 sm:py-12 md:py-16 lg:py-20 bg-[#F4F0EC]" aria-labelledby="goals-heading">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-
-        <h2 id="goals-heading" class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-[#183942] text-center mb-3 md:mb-4">
-          El acompañamiento <span class="text-[#CC8989]">terapéutico</span> busca
-        </h2>
-        <p class="text-sm md:text-base text-gray-500 text-center mb-8 sm:mb-10 md:mb-16 max-w-sm md:max-w-lg mx-auto">
-          Objetivos claros para tu bienestar emocional
+        {/* Subheading */}
+        <p class="text-base font-light text-[#4a6068] leading-[1.7] max-w-110 mb-12">
+          Un acompañamiento para mujeres que buscan construir una relación más equilibrada consigo mismas, con sus vínculos y con las demandas del entorno. Presencial en{" "}
+          <strong class="font-medium text-[#183942]">Heredia</strong> y{" "}
+          <strong class="font-medium text-[#183942]">online</strong> para toda Costa Rica.
         </p>
 
-        <div class="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
-          {therapeuticGoals.map((goal, index) => (
-            <div class="relative flex items-start gap-4 md:gap-6 pb-8 md:pb-10 last:pb-0">
-              {index < therapeuticGoals.length - 1 && (
-                <div class="absolute left-5 md:left-6 top-12 md:top-14 w-0.5 h-full bg-linear-to-b from-[#CC8989]/25 to-[#F5DEB3]/25" aria-hidden="true"></div>
-              )}
-              <div class="relative z-10 shrink-0 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#CC8989]/20" aria-hidden="true">
-                {goal.icon === "shield-alert" && (
-                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    <line x1="12" y1="8" x2="12" y2="12"/>
-                    <line x1="12" y1="16" x2="12.01" y2="16"/>
-                  </svg>
-                )}
-                {goal.icon === "sparkles" && (
-                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/>
-                    <path d="M5 3l.8 2.2L8 6l-2.2.8L5 9l-.8-2.2L2 6l2.2-.8z"/>
-                    <path d="M19 13l.8 2.2 2.2.8-2.2.8L19 19l-.8-2.2L16 16l2.2-.8z"/>
-                  </svg>
-                )}
-                {goal.icon === "heart-pulse" && (
-                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 7.65l1.06 1.06L12 21.23l7.36-7.94 1.06-1.06a5.4 5.4 0 0 0 0-7.65z"/>
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                  </svg>
-                )}
-                {goal.icon === "flame" && (
-                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/>
-                  </svg>
-                )}
-                {goal.icon === "hand-heart" && (
-                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#CC8989]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M11 14H9a1 1 0 0 1 0-2h3.5"/>
-                    <path d="M16 14h-1"/>
-                    <path d="M16 8h1a2 2 0 0 1 0 4h-1"/>
-                    <path d="M8 10V7a3 3 0 0 1 6 0v3"/>
-                    <path d="M5 20v-5a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v5"/>
-                    <path d="M12 6c.34-.5.76-1 1-1.5a3.5 3.5 0 0 1 5 5c-.5.5-1.17 1-1.5 1.5"/>
-                  </svg>
-                )}
-              </div>
-              <div class="bg-white rounded-xl md:rounded-2xl p-4 md:p-5 shadow-sm flex-1 border border-gray-100">
-                <p class="text-sm md:text-base text-gray-700 leading-relaxed">{goal.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== LOCAL SEO ===== -->
-    <section class="py-10 sm:py-12 md:py-16 bg-white" aria-labelledby="local-heading">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-2xl mx-auto text-center">
-          <h2 id="local-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] mb-4">
-            Terapia para mujeres en <span class="text-[#CC8989]">Heredia, Costa Rica</span>
-          </h2>
-          <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-            Si buscás una psicóloga para mujeres en Heredia, ofrezco atención presencial en consultorio y sesiones online para todo el país. El espacio terapéutico está diseñado para brindar confidencialidad, respeto y acompañamiento profesional, sin juicios y adaptado al ritmo de cada mujer.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== FAQ ===== -->
-    <section class="py-10 sm:py-12 md:py-16 bg-[#F4F0EC]" aria-labelledby="faq-heading">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-2xl mx-auto">
-          <h2 id="faq-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] text-center mb-8 md:mb-10">
-            Preguntas frecuentes
-          </h2>
-          <dl class="space-y-4">
-            <div class="bg-white rounded-xl p-5 sm:p-6">
-              <dt class="font-semibold text-[#183942] text-base mb-2">¿Qué es la terapia psicológica para mujeres?</dt>
-              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">Es un acompañamiento especializado que reconoce los factores biológicos, sociales y relacionales propios de la experiencia femenina: presiones de género, autoexigencia, agotamiento emocional, dificultad para poner límites y baja autoestima. Trabaja desde un enfoque cognitivo-conductual basado en evidencia.</dd>
-            </div>
-            <div class="bg-white rounded-xl p-5 sm:p-6">
-              <dt class="font-semibold text-[#183942] text-base mb-2">¿Cómo sé si necesito terapia psicológica?</dt>
-              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">Podría ser útil si experimentás ansiedad frecuente, agotamiento emocional, dificultad para poner límites, baja autoestima, sensación de no poder con todo, o si atravesás una etapa de cambio o crisis emocional. No es necesario estar en crisis para iniciar un proceso terapéutico.</dd>
-            </div>
-            <div class="bg-white rounded-xl p-5 sm:p-6">
-              <dt class="font-semibold text-[#183942] text-base mb-2">¿Las sesiones son online o presenciales?</dt>
-              <dd class="text-sm sm:text-base text-gray-600 leading-relaxed">Ofrezco sesiones tanto online (para cualquier parte de Costa Rica y el exterior) como presenciales en Heredia, Costa Rica. La modalidad se acuerda según lo que mejor se adapte a cada persona.</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CTA ===== -->
-    <section class="py-10 sm:py-12 md:py-16 lg:py-20 bg-white" aria-labelledby="cta-heading">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto text-center">
-          <h2 id="cta-heading" class="font-display text-2xl sm:text-3xl font-semibold text-[#183942] mb-4 md:mb-5">
-            ¿Querés iniciar tu proceso terapéutico?
-          </h2>
-          <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-7 sm:mb-8 md:mb-10 px-2 sm:px-0">
-            La terapia cognitivo-conductual cuenta con sólida evidencia en el tratamiento de la ansiedad, la depresión y el estrés crónico, y resulta especialmente útil para acompañar a mujeres que buscan construir una relación más equilibrada consigo mismas, con sus vínculos y con las demandas del entorno.
-          </p>
+        {/* Actions */}
+        <div class="flex items-center gap-8 flex-wrap">
           <a
             href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina"
-            class="inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-[#367588] text-white text-sm md:text-base font-semibold rounded-full hover:bg-[#367588]/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
-            aria-label="Agendar cita de Salud Mental Femenina con Psicóloga Amelia Reyes por WhatsApp"
+            class="inline-flex items-center gap-[0.6rem] bg-[#183942] text-[#F4F0EC] text-[0.8rem] font-medium tracking-widest uppercase px-8 py-4 no-underline transition-colors duration-250 hover:bg-[#CC8989]"
+            aria-label="Agendar cita de Salud Mental Femenina por WhatsApp"
           >
-            Quiero agendar mi cita
+            Agenda tu cita
+            <svg class="w-3.5 h-3.5 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a
+            href="#acompanamiento"
+            class="text-[0.8rem] font-normal tracking-[0.08em] text-[#CC8989] no-underline border-b border-[#CC8989] pb-0.5 transition-opacity duration-200 hover:opacity-65"
+          >
+            Cómo te acompaño
           </a>
         </div>
+      </div>
+
+      {/* Hero Right */}
+      <div class="relative bg-[#2d1f1f] overflow-hidden max-[900px]:h-[55vw] max-[900px]:min-h-65" aria-hidden="true">
+        <img
+          src={ameliaProfile.src}
+          alt=""
+          width={ameliaProfile.width}
+          height={ameliaProfile.height}
+          loading="eager"
+          decoding="async"
+          class="w-full h-full object-cover object-[center_40%] opacity-50 mix-blend-luminosity"
+        />
+        {/* Gradient overlay */}
+        <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(135deg, #2d1f1f 0%, transparent 60%)"></div>
+      </div>
+    </section>
+
+    {/* Line divider */}
+    <div class="h-px m-0" style="background: linear-gradient(to right, #CC8989 30%, transparent)"></div>
+
+    {/* ===== CONTEXTO ===== */}
+    <section id="acompanamiento" class="py-20 px-[5vw] max-[640px]:py-14 max-[640px]:px-6" aria-labelledby="contexto-heading">
+      <div class="text-[0.68rem] font-medium tracking-[0.2em] uppercase text-[#CC8989] mb-5">
+        Enfoque terapéutico
+      </div>
+
+      <div class="grid grid-cols-2 gap-0 mt-16 max-[900px]:grid-cols-1">
+        {/* Left */}
+        <div class="pr-16 border-r border-[#d9d3cc] max-[900px]:pr-0 max-[900px]:border-r-0 max-[900px]:border-b max-[900px]:border-[#d9d3cc] max-[900px]:pb-12 max-[900px]:mb-12">
+          <h2
+            id="contexto-heading"
+            class="font-cormorant font-normal leading-[1.15] text-[#183942] mb-7"
+            style="font-size: clamp(1.8rem, 3vw, 2.5rem)"
+          >
+            ¿Qué es la terapia psicológica para mujeres?
+          </h2>
+          <p class="text-base font-light text-[#4a6068] leading-[1.8] mb-6">
+            La salud mental femenina reconoce que las mujeres enfrentan, a lo largo de su vida, múltiples transiciones biológicas, sociales y relacionales que impactan su bienestar emocional: cambios hormonales, presiones de género, exigencias laborales y familiares, maternidad, duelos, rupturas, experiencias de violencia, entre otros.
+          </p>
+          <p class="text-base font-light text-[#4a6068] leading-[1.8] mb-6">
+            La evidencia muestra que estos factores pueden influir en una mayor prevalencia de ansiedad, depresión, trastornos del estado de ánimo y altos niveles de autoexigencia y culpa.
+          </p>
+          <blockquote class="border-l-2 border-[#CC8989] py-6 pl-8 mt-10">
+            <p class="font-cormorant text-[1.25rem] italic font-normal text-[#183942] leading-[1.55] mb-3">
+              "Muchas mujeres han aprendido creencias que refuerzan el sacrificio personal o la necesidad de cumplir con ideales inalcanzables. Estas creencias sostienen el agotamiento y la postergación de las propias necesidades."
+            </p>
+            <footer class="text-[0.75rem] font-light tracking-[0.08em] text-[#a08080] uppercase">
+              — Psicóloga Amelia Reyes
+            </footer>
+          </blockquote>
+        </div>
+
+        {/* Right */}
+        <div class="pl-16 max-[900px]:pl-0">
+          <h3 class="font-cormorant text-[1.4rem] font-medium text-[#183942] mb-6">
+            ¿Cuándo buscar terapia psicológica?
+          </h3>
+          <ul class="list-none p-0 m-0" role="list">
+            {signals.map((item, i) => (
+              <li class="flex items-start gap-4 py-[0.9rem] border-b border-[#e8e2db] text-[0.9rem] font-light text-[#4a6068] leading-normal last:border-b-0">
+                <span class="font-cormorant text-[0.85rem] text-[#CC8989] italic shrink-0 pt-px">
+                  {String(i + 1).padStart(2, "0")}.
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {/* ===== OBJETIVOS ===== */}
+    <section class="bg-[#2d1f1f] py-20 px-[5vw] max-[640px]:py-14 max-[640px]:px-6" aria-labelledby="goals-heading">
+      <div class="flex items-end justify-between gap-8 mb-14 flex-wrap">
+        <div>
+          <div class="text-[0.68rem] font-medium tracking-[0.2em] uppercase text-[#c4a0a0] mb-5">
+            Acompañamiento
+          </div>
+          <h2
+            id="goals-heading"
+            class="font-cormorant font-normal leading-[1.15] text-[#f5eded]"
+            style="font-size: clamp(1.8rem, 3vw, 2.5rem)"
+          >
+            El proceso terapéutico busca
+          </h2>
+        </div>
+        <p class="text-[0.9rem] font-light text-[#a08080] max-w-[320px] leading-[1.6]">
+          Objetivos concretos para construir una relación más equilibrada contigo misma.
+        </p>
+      </div>
+
+      <div
+        data-goals-grid
+        class="grid border-t border-[#4a2e2e]"
+        style="grid-template-columns: repeat(5, 1fr)"
+        role="list"
+      >
+        {therapeuticGoals.map((goal, i) => (
+          <div
+            class="p-8 border-r border-b border-[#4a2e2e] last:border-r-0 max-[1100px]:nth-col-3-no-border max-[640px]:even:border-r-0"
+            role="listitem"
+          >
+            <span class="font-cormorant text-[0.9rem] italic text-[#CC8989] mb-5 block">
+              {goal.number}
+            </span>
+            <div class="text-[0.85rem] font-medium text-[#f0dede] mb-3 leading-[1.3]">
+              {goal.title}
+            </div>
+            <p class="text-[0.78rem] font-light text-[#9a7070] leading-[1.65]">
+              {goal.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* ===== LOCAL STRIP ===== */}
+    <div
+      class="bg-[#eae5df] py-10 px-[5vw] flex items-center gap-8 flex-wrap max-[640px]:py-8 max-[640px]:px-6 max-[640px]:gap-4"
+      aria-label="Disponibilidad"
+    >
+      <span class="text-[0.68rem] font-medium tracking-[0.18em] uppercase text-[#CC8989] shrink-0">
+        Heredia · Online · Costa Rica
+      </span>
+      <div class="flex-1 h-px bg-[#d9d3cc]" aria-hidden="true"></div>
+      <p class="text-[0.83rem] font-light text-[#4a6068] leading-[1.65] max-w-160">
+        Si buscás una psicóloga para mujeres en Heredia, ofrezco atención presencial en consultorio y sesiones online para todo el país. Confidencialidad, respeto y acompañamiento profesional, sin juicios y adaptado al ritmo de cada mujer.
+      </p>
+    </div>
+
+    {/* ===== FAQ ===== */}
+    <section class="bg-white py-20 px-[5vw] max-[640px]:py-14 max-[640px]:px-6" aria-labelledby="faq-heading">
+      <div class="grid gap-16 items-start max-[800px]:grid-cols-1 max-[800px]:gap-8" style="grid-template-columns: 280px 1fr">
+        <div>
+          <div class="text-[0.68rem] font-medium tracking-[0.2em] uppercase text-[#CC8989] mb-5">
+            FAQ
+          </div>
+          <h2
+            id="faq-heading"
+            class="font-cormorant font-normal leading-[1.15] text-[#183942]"
+            style="font-size: clamp(1.8rem, 3vw, 2.5rem)"
+          >
+            Preguntas frecuentes
+          </h2>
+        </div>
+
+        <dl class="border-t border-[#e8e2db]">
+          {faqs.map((item) => (
+            <div class="faq-item border-b border-[#e8e2db]" data-faq>
+              <button
+                class="w-full bg-transparent border-none py-6 flex items-center justify-between gap-4 cursor-pointer text-left font-dm-sans text-[0.9rem] font-medium text-[#183942] leading-[1.4]"
+                aria-expanded="false"
+              >
+                <span>{item.q}</span>
+                <svg
+                  class="shrink-0 w-4 h-4 text-[#CC8989] transition-transform duration-300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <dd class="faq-answer hidden pb-6 text-[0.85rem] font-light text-[#4a6068] leading-[1.75]">
+                {item.a}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    {/* ===== CTA ===== */}
+    <section class="bg-[#2d1f1f] py-24 px-[5vw] relative overflow-hidden max-[640px]:py-16 max-[640px]:px-6" aria-labelledby="cta-heading">
+      {/* Decorative circles */}
+      <div class="absolute rounded-full pointer-events-none border border-[#4a2e2e]" style="right: -80px; top: -80px; width: 400px; height: 400px;" aria-hidden="true"></div>
+      <div class="absolute rounded-full pointer-events-none border border-[#4a2e2e]" style="right: -40px; top: -40px; width: 280px; height: 280px;" aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-175">
+        <div class="text-[0.68rem] font-medium tracking-[0.2em] uppercase text-[#c4a0a0] mb-6">
+          Próximo paso
+        </div>
+        <h2
+          id="cta-heading"
+          class="font-cormorant font-light leading-[1.15] text-[#f5eded] mb-6"
+          style="font-size: clamp(2rem, 4vw, 3.5rem)"
+        >
+          ¿Querés iniciar tu<br />
+          <em class="italic text-[#c4a0a0]">proceso terapéutico?</em>
+        </h2>
+        <p class="text-[0.9rem] font-light text-[#a08080] leading-[1.75] max-w-130 mb-12">
+          La terapia cognitivo-conductual cuenta con sólida evidencia en el tratamiento de la ansiedad, la depresión y el estrés crónico, y resulta especialmente útil para acompañar a mujeres que buscan construir una relación más equilibrada consigo mismas, con sus vínculos y con las demandas del entorno.
+        </p>
+        <a
+          href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina"
+          class="inline-flex items-center gap-[0.7rem] bg-[#F4F0EC] text-[#2d1f1f] text-[0.78rem] font-medium tracking-[0.12em] uppercase px-9 py-4 no-underline transition-colors duration-250 hover:bg-[#CC8989] hover:text-[#F4F0EC]"
+          aria-label="Agendar cita de Salud Mental Femenina con Psicóloga Amelia Reyes por WhatsApp"
+        >
+          Quiero agendar mi cita
+          <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </section>
 
   </div>
+
+  {/* Minimal CSS for things Tailwind can't express inline */}
+  <style>
+    .font-cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .font-dm-sans   { font-family: 'DM Sans', sans-serif; }
+
+    /* FAQ open state */
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open button svg  { transform: rotate(45deg); }
+    .faq-item.open button      { aria-expanded: true; }
+
+    /* Goals grid responsive overrides */
+    @media (max-width: 1100px) {
+      [data-goals-grid] {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+      [data-goals-grid] > *:nth-child(3n) {
+        border-right: none;
+      }
+    }
+    @media (max-width: 640px) {
+      [data-goals-grid] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      [data-goals-grid] > *:nth-child(2n) {
+        border-right: none;
+      }
+    }
+  </style>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('[data-faq]').forEach((item) => {
+      const btn = item.querySelector('button');
+      btn?.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('[data-faq]').forEach((el) => {
+          el.classList.remove('open');
+          el.querySelector('button')?.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
 </MainLayout>

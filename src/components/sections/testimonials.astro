@@ -95,6 +95,30 @@ const testimonials = [
     role: "Salud mental materna",
     content: "Iniciar un proceso de terapia individual con Amelia ha sido de las mejores decisiones que he tomado para mi salud mental. Además de escuchar con enorme empatía y calidez, ofreciendo palabras de aliento y de apoyo, Amelia propone acciones prácticas y realistas para ir implementando cambios. Después de cada sesión, envía un resumen de lo conversado durante la sesión y las tareas a seguir, lo cual aprecio muchísimo porque demuestra su gran capacidad de escucha, permite tener a mano el plan a seguir, y sirve para visualizar avances entre sesiones. He logrado cambios muy positivos en mi vida gracias a Amelia y me siento sumamente agradecida por su acompañamiento, apoyo y guía en mi proceso.",
     rating: 5,
+  },  
+  {
+    name: "Beatriz",
+    role: "Salud mental femenina",
+    content: "He estado aproximadamente durante tres años con Amelia y ha sido un proceso muy valioso para mí. Su acompañamiento ha sido constante, respetuoso y profesional. Me ha ayudado a comprenderme mejor y a enfrentar distintas etapas con mayor claridad y estructura. Estoy infinitamente agradecida por el espacio y acompañamiento.",
+    rating: 5,
+  },  
+  {
+    name: "Valerie",
+    role: "Salud mental materna",
+    content: "Muchas gracias Amelia por todo tu apoyo en mi proceso terapeutico, inicie con mucha expectativa al ser la primera vez que llevaba terapia y he recibido un acompañamiento muy profesional y empático, especialmente en temas relacionados con la maternidad y el equilibrio con la vida laboral. La orientación que me has brindado me ha ayudado a tomar decisiones con mayor claridad y a manejar mejor el estrés y la culpa que muchas veces surgen en esta etapa.",
+    rating: 5,
+  },
+    {
+    name: "Marianela",
+    role: "Salud mental femenina",
+    content: "En el proceso con Amelia encontré a alguien que no me juzgaba y que estaba para escucharme. Me ayudó a ver las cosas desde otro ángulo. Siempre validando mis emociones. Muchas gracias Ame ❤️‍🩹",
+    rating: 5,
+  },
+    {
+    name: "Josué",
+    role: "Terapia individual",
+    content: "Amelia es una de las mejores personas que he conocido en mi vida, ella ama lo que hace y se nota en cada sesión! Me ha enseñado y dado muchas herramientas para poder avanzar y superar las batallas en mi vida. Llegó a mi cómo un ángel cuando estaba en el punto más bajo de mi vida, la perspectiva, el consejo y la manera en que fui escuchado me ayudó a levantarme y poder seguir adelante!",
+    rating: 5,
   },
 ];
 
@@ -378,10 +402,10 @@ const MAX_CHARS = 200;
   const nextBtnMobile = document.getElementById('next-mobile');
   const dots = document.querySelectorAll('.dot');
   let currentIndexMobile = 0;
-  const totalTestimonials = 16;
+  const totalTestimonials = 20;
 
 const VISIBLE_DOTS = 5;
-  const DOT_STEP = 18;
+  const DOT_STEP = 19;
   const dotsInner = document.getElementById('dots-inner');
 
   function updateCarouselMobile(index: number) {
@@ -437,7 +461,7 @@ trackMobile.style.transform = `translateX(-${currentIndexMobile * 100}%)`;
   // ===== DESKTOP CAROUSEL =====
   const trackDesktop = document.getElementById('testimonials-track-desktop');
   let currentIndexDesktop = 0;
-  const testimonialCount = 16;
+  const testimonialCount = 20;
   let autoScrollInterval: number;
 
   function moveCarouselDesktop() {
