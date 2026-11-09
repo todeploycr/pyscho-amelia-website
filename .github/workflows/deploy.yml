@@ -1,0 +1,107 @@
+# Despliegue automático a Hostinger.
+# Cada push a main (por ejemplo, al fusionar un PR) compila el sitio y lo publica.
+# También se puede lanzar a mano desde la pestaña "Actions" → "Deploy a Hostinger" → "Run workflow".
+#
+# Requiere el secret HOSTINGER_SSH_KEY (llave privada autorizada en hPanel → Acceso SSH).
+
+name: Deploy a Hostinger
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Nunca dos despliegues al mismo tiempo; si llega uno nuevo, espera al anterior.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  SSH_HOST: 46.202.183.24
+  SSH_PORT: "65002"
+  SSH_USER: u304762327
+  DOMAIN: psicologaameliareyes.com
+  # Huella pública del servidor (coincide con la de hPanel). Evita conectarse a un servidor falso.
+  KNOWN_HOST: "[46.202.183.24]:65002 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF0XKPRjXKeofdNMnCS9oW8iRI3AgWvuQd6fIhYMwDC1"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+      url: https://psicologaameliareyes.com
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Compilar sitio
+        run: npm run build
+
+      - name: Verificar build
+        run: |
+          test -f dist/index.html || { echo "::error::dist/index.html no existe"; exit 1; }
+          css=$(find dist/_astro -name '*.css' -size +10k | wc -l)
+          # Protección: una versión de Tailwind generó CSS casi vacío; no publicar si pasa de nuevo.
+          [ "$css" -ge 1 ] || { echo "::error::El CSS generado es sospechosamente pequeño"; exit 1; }
+
+      - name: Configurar SSH
+        env:
+          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+        run: |
+          [ -n "$SSH_KEY" ] || { echo "::error::Falta el secret HOSTINGER_SSH_KEY"; exit 1; }
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$KNOWN_HOST" > ~/.ssh/known_hosts
+
+      - name: Respaldar versión actual
+        run: |
+          ssh -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" bash -s -- "$DOMAIN" <<'EOF'
+          set -euo pipefail
+          domain="$1"
+          mkdir -p ~/backups
+          tar -czf ~/backups/$domain-public_html-$(date +%Y%m%d-%H%M%S).tar.gz -C ~/domains/$domain public_html
+          # Conservar solo los 5 respaldos más recientes de este dominio
+          ls -1t ~/backups/$domain-public_html-*.tar.gz | tail -n +6 | xargs -r rm -f
+          EOF
+
+      - name: Publicar
+        run: |
+          # --delete elimina archivos viejos del sitio, pero las reglas "P" (protect)
+          # dejan intactos los archivos que solo existen en el servidor.
+          rsync -az --delete \
+            --filter='P /send-email.php' \
+            --filter='P /PHPMailer/' \
+            --filter='P /robots.txt' \
+            --filter='P /n8n/' \
+            --filter='P /n8na/' \
+            --filter='P /.htaccess' \
+            --filter='P /.well-known/' \
+            -e "ssh -p $SSH_PORT" \
+            dist/ "$SSH_USER@$SSH_HOST:domains/$DOMAIN/public_html/"
+
+      - name: Verificar sitio en vivo
+        run: |
+          for path in / /terapia-materna/ /terapia-de-parejas/ /terapia-femenina/ /sitemap-index.xml; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -L "https://$DOMAIN$path")
+            echo "$path -> $code"
+            [ "$code" = "200" ] || { echo "::error::$path respondió $code"; exit 1; }
+          done
+
+      - name: Limpiar llave
+        if: always()
+        run: rm -f ~/.ssh/id_ed25519
