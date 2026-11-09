@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import ameliaTable from "@/assets/images/amelia-sit-on-table.jpeg";
 import ameliaFamily from "@/assets/images/amelia-family.jpeg";
 ---
@@ -18,8 +19,10 @@ import ameliaFamily from "@/assets/images/amelia-family.jpeg";
             <div
               class="relative bg-white rounded-4xl overflow-hidden shadow-xl"
             >
-              <img
-                src={ameliaTable.src}
+              <Image
+                src={ameliaTable}
+                widths={[480, 960]}
+                sizes="(min-width: 480px) 448px, 100vw"
                 alt="Amelia - Psicóloga especializada en maternidad y pareja"
                 class="w-full h-auto object-cover aspect-4/5"
               />
@@ -35,8 +38,9 @@ import ameliaFamily from "@/assets/images/amelia-family.jpeg";
             <div
               class="relative rounded-2xl overflow-hidden shadow-lg border-4 border-white"
             >
-              <img
-                src={ameliaFamily.src}
+              <Image
+                src={ameliaFamily}
+                width={300}
                 alt="Amelia con su familia"
                 class="w-full h-full object-cover"
               />

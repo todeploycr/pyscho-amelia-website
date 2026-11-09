@@ -1,13 +1,17 @@
 ---
+import { EMAIL, INSTAGRAM_URL, PHONE_SCHEMA, SITE_URL, WHATSAPP_URL } from "@/config/site";
 import "../styles/global.css";
 import seoImage from "@/assets/images/amelia-sit-on-table.jpeg";
-import Header from "@/components/layout/header.astro";
-import Footer from "@/components/layout/footer.astro";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
 
 interface Props {
   title?: string;
   description?: string;
-  image?: string;
+  /** Imagen para compartir en redes. Se recorta automáticamente a 1200×630. */
+  image?: ImageMetadata;
   showGlobalFAQ?: boolean; // true solo en el home (index.astro)
 }
 
@@ -18,11 +22,12 @@ const {
   showGlobalFAQ = false,
 } = Astro.props;
 
-const siteUrl = "https://psicologaameliareyes.com";
+const siteUrl = SITE_URL;
 const siteImageUrl = `${siteUrl}${seoImage.src}`;
 
 // Si la página pasa su propia imagen se usa; si no, la imagen global del sitio
-const ogImageUrl = image ? `${siteUrl}${image}` : siteImageUrl;
+const ogImage = await getImage({ src: image ?? seoImage, width: 1200, height: 630, fit: "cover", position: "top", format: "jpg" });
+const ogImageUrl = new URL(ogImage.src, siteUrl).href;
 
 // URLs dinámicas para canonical y OG
 const canonical = Astro.url.href;
@@ -77,8 +82,8 @@ const currentUrl = Astro.url.href;
       "image": siteImageUrl,
       "logo": siteImageUrl,
       "url": siteUrl,
-      "telephone": "+506-6058-7256",
-      "email": "psicoameliareyes@gmail.com",
+      "telephone": PHONE_SCHEMA,
+      "email": EMAIL,
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Santo Domingo",
@@ -120,8 +125,8 @@ const currentUrl = Astro.url.href;
         { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00" }
       ],
       "sameAs": [
-        "https://www.instagram.com/ame.psicomamaypareja",
-        "https://wa.me/50660587256"
+        INSTAGRAM_URL,
+        WHATSAPP_URL
       ],
       "paymentAccepted": "Transferencia bancaria, SINPE Móvil, Efectivo, Tarjeta",
       "currenciesAccepted": "CRC"
@@ -141,11 +146,11 @@ const currentUrl = Astro.url.href;
       "worksFor": { "@type": "Organization", "name": "Psicóloga Amelia Reyes" },
       "url": siteUrl,
       "image": siteImageUrl,
-      "email": "psicoameliareyes@gmail.com",
-      "telephone": "+506-6058-7256",
+      "email": EMAIL,
+      "telephone": PHONE_SCHEMA,
       "sameAs": [
-        "https://www.instagram.com/ame.psicomamaypareja",
-        "https://wa.me/50660587256"
+        INSTAGRAM_URL,
+        WHATSAPP_URL
       ],
       "knowsAbout": ["Psicología Clínica","Psicología Materna","Salud Mental Materna","Terapia de Pareja","Salud Mental Femenina"],
       "hasCredential": {
@@ -171,6 +176,16 @@ const currentUrl = Astro.url.href;
         { "@type": "Question", "name": "¿Cómo agendo mi primera cita?", "acceptedAnswer": { "@type": "Answer", "text": "Podés agendar tu cita haciendo clic en el botón que se encuentra al final de la página o contactándome directamente por WhatsApp." } }
       ]
     })} />}
+    
+    <!-- Fuentes (link en lugar de @import en CSS para no bloquear el render) -->
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    
     
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

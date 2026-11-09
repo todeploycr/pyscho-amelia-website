@@ -1,14 +1,15 @@
 ---
+import { Image } from "astro:assets";
 import ameliaProfile from "@/assets/images/amelia-profile.jpeg";
 ---
 
 <section
   id="inicio"
-  class="relative min-h-screen flex items-center overflow-hidden from-[#f5ebe6] via-white to-[#f4d9d9]/20"
+  class="relative min-h-screen flex items-center overflow-hidden"
 >
   <!-- Decorative shapes -->
   <div
-    class="absolute top-0 left-0 w-1/2 h-full from-[#CC8989]/20 via-[#f4d9d9]/30 to-transparent"
+    class="absolute top-0 left-0 w-1/2 h-full"
     style="clip-path: polygon(0 0, 100% 0, 0 100%);"
   >
   </div>
@@ -88,14 +89,18 @@ import ameliaProfile from "@/assets/images/amelia-profile.jpeg";
           <!-- Main image with diamond mask -->
           <div class="relative w-full h-full transform rotate-0">
             <div
-              class="absolute inset-0 bg-linear-to-br from-[#CC8989]/90 to-[#f4d9d9]/40 rounded-4xl rotate-6 w-102% shadow-lg"
+              class="absolute inset-0 bg-linear-to-br from-[#CC8989]/90 to-[#f4d9d9]/40 rounded-4xl rotate-6 shadow-lg"
             >
             </div>
             <div
               class="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white"
             >
-              <img
-                src={ameliaProfile.src}
+              <Image
+                src={ameliaProfile}
+                widths={[400, 800]}
+                sizes="(min-width: 768px) 384px, 288px"
+                loading="eager"
+                fetchpriority="high"
                 alt="Amelia - Psicóloga"
                 class="w-100 h-100 object-cover object-[50%_20%] scale-100"
               />
