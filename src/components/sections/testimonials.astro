@@ -146,7 +146,7 @@ const MAX_CHARS = 200;
       <!-- Mobile: Carousel con navegación -->
       <div class="md:hidden">
         <div class="relative px-4" style="overflow: hidden; padding-top: 1.25rem; margin-top: -1.25rem;">
-          <div id="testimonials-track-mobile" class="flex transition-transform duration-500 ease-in-out">
+          <div id="testimonials-track-mobile" data-count={testimonials.length} class="flex transition-transform duration-500 ease-in-out">
             {testimonials.map((testimonial, idx) => (
               <div class="shrink-0 w-full px-2">
                 <div class="testimonial-card bg-white rounded-3xl p-8 shadow-lg relative transition-all duration-300">
@@ -297,7 +297,7 @@ const MAX_CHARS = 200;
       <!-- Desktop: Carousel automático -->
       <div class="hidden lg:block">
         <div class="overflow-visible relative">
-          <div id="testimonials-track-desktop" class="flex gap-8 transition-transform duration-800 ease-in-out">
+          <div id="testimonials-track-desktop" data-count={testimonials.length} class="flex gap-8 transition-transform duration-800 ease-in-out">
             {[...testimonials, ...testimonials].map((testimonial, idx) => (
               <div class="shrink-0 w-[calc(33.333%-1.5rem)]">
                 <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 relative h-full flex flex-col">
@@ -402,7 +402,8 @@ const MAX_CHARS = 200;
   const nextBtnMobile = document.getElementById('next-mobile');
   const dots = document.querySelectorAll('.dot');
   let currentIndexMobile = 0;
-  const totalTestimonials = 20;
+  // Se calcula a partir de la lista: agregar o quitar testimonios no rompe el carrusel
+  const totalTestimonials = Number(trackMobile?.dataset.count) || dots.length;
 
 const VISIBLE_DOTS = 5;
   const DOT_STEP = 19;
@@ -461,7 +462,7 @@ trackMobile.style.transform = `translateX(-${currentIndexMobile * 100}%)`;
   // ===== DESKTOP CAROUSEL =====
   const trackDesktop = document.getElementById('testimonials-track-desktop');
   let currentIndexDesktop = 0;
-  const testimonialCount = 20;
+  const testimonialCount = Number(trackDesktop?.dataset.count) || 0;
   let autoScrollInterval: number;
 
   function moveCarouselDesktop() {

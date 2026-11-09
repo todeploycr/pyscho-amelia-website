@@ -1,4 +1,5 @@
 ---
+import { whatsappLink } from "@/config/site";
 const faqs = [
   {
     question: "¿Cómo son las sesiones online?",
@@ -70,7 +71,7 @@ const faqs = [
         ¿Tienes más preguntas?
       </p>
       <a
-        href="https://wa.me/50660587256?text=Hola%20Amelia,%20tengo%20una%20pregunta"
+        href={whatsappLink("Hola Amelia, tengo una pregunta")}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 text-[#367588] font-medium hover:underline"

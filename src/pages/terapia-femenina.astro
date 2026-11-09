@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import { PHONE_SCHEMA, whatsappLink } from "@/config/site";
 import MainLayout from "@/layouts/MainLayout.astro";
 import ameliaProfile from "@/assets/images/amelia-women-therapy.jpeg";
 
@@ -72,7 +74,7 @@ const jsonLdService = {
     "jobTitle": "Psicóloga Clínica",
     "description": "Psicóloga clínica especializada en salud mental femenina y bienestar emocional en Costa Rica.",
     "url": siteUrl,
-    "telephone": "+50660587256",
+    "telephone": PHONE_SCHEMA,
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Heredia",
@@ -90,7 +92,7 @@ const jsonLdService = {
     "@type": "Offer",
     "availability": "https://schema.org/InStock",
     "priceCurrency": "CRC",
-    "url": "https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina",
+    "url": whatsappLink("Hola Amelia, me interesa el servicio de Salud Mental Femenina"),
   },
 };
 
@@ -139,7 +141,7 @@ const title = "Salud Mental Femenina en Costa Rica | Psicóloga Amelia Reyes | H
 const description = "Terapia psicológica especializada para mujeres en Costa Rica. Trabajá la ansiedad, autoestima, estrés y agotamiento emocional con enfoque cognitivo-conductual. Atención presencial en Heredia y sesiones online con la Psicóloga Amelia Reyes.";
 ---
 
-<MainLayout title={title} description={description} image={ameliaProfile.src}>
+<MainLayout title={title} description={description} image={ameliaProfile}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdService)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdBreadcrumb)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdFAQ)} />
@@ -191,7 +193,7 @@ const description = "Terapia psicológica especializada para mujeres en Costa Ri
         {/* Actions */}
         <div class="flex items-center gap-8 flex-wrap">
           <a
-            href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina"
+            href={whatsappLink("Hola Amelia, me interesa el servicio de Salud Mental Femenina")}
             class="inline-flex items-center gap-[0.6rem] bg-[#183942] text-[#F4F0EC] text-[0.8rem] font-medium tracking-widest uppercase px-8 py-4 no-underline transition-colors duration-250 hover:bg-[#CC8989]"
             aria-label="Agendar cita de Salud Mental Femenina por WhatsApp"
           >
@@ -209,12 +211,13 @@ const description = "Terapia psicológica especializada para mujeres en Costa Ri
 
       {/* Hero Right */}
       <div class="relative bg-[#2d1f1f] overflow-hidden max-[900px]:h-[55vw] max-[900px]:min-h-65" aria-hidden="true">
-        <img
-          src={ameliaProfile.src}
+        <Image
+          src={ameliaProfile}
           alt=""
-          width={ameliaProfile.width}
-          height={ameliaProfile.height}
+          widths={[640, 1060]}
+          sizes="(min-width: 768px) 50vw, 100vw"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
           class="w-full h-full object-cover object-[center_40%] opacity-50 mix-blend-luminosity"
         />
@@ -406,7 +409,7 @@ const description = "Terapia psicológica especializada para mujeres en Costa Ri
           La terapia cognitivo-conductual cuenta con sólida evidencia en el tratamiento de la ansiedad, la depresión y el estrés crónico, y resulta especialmente útil para acompañar a mujeres que buscan construir una relación más equilibrada consigo mismas, con sus vínculos y con las demandas del entorno.
         </p>
         <a
-          href="https://wa.me/50660587256?text=Hola%20Amelia%2C%20me%20interesa%20el%20servicio%20de%20Salud%20Mental%20Femenina"
+          href={whatsappLink("Hola Amelia, me interesa el servicio de Salud Mental Femenina")}
           class="inline-flex items-center gap-[0.7rem] bg-[#F4F0EC] text-[#2d1f1f] text-[0.78rem] font-medium tracking-[0.12em] uppercase px-9 py-4 no-underline transition-colors duration-250 hover:bg-[#CC8989] hover:text-[#F4F0EC]"
           aria-label="Agendar cita de Salud Mental Femenina con Psicóloga Amelia Reyes por WhatsApp"
         >
